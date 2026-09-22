@@ -8,10 +8,6 @@
 
 <style>
 
-/* =========================
-   GENERAL
-========================= */
-
 * {
     box-sizing: border-box;
 }
@@ -122,11 +118,6 @@ body {
 /* =========================
    MODO OSCURO
 ========================= */
-
-/* CORREGIDO:
-   Antes era fixed y flotaba al hacer scroll.
-   Ahora pertenece a la parte superior de la página.
-*/
 
 .modoSuperior {
     position: absolute;
@@ -804,6 +795,16 @@ body.oscuro .btnNueva {
         width: 64px;
     }
 
+    /* =========================
+       EVITA ZOOM AUTOMATICO
+       EN IPHONE / SAFARI
+    ========================= */
+
+    .buscador,
+    .cantidad {
+        font-size: 16px;
+    }
+
     .botones {
         flex-direction: column;
     }
@@ -1184,10 +1185,6 @@ function crearAreas() {
                 fila.className = "producto";
 
 
-                /* =====================
-                   NOMBRE + META
-                ===================== */
-
                 const infoProducto =
                     document.createElement("div");
 
@@ -1220,10 +1217,6 @@ function crearAreas() {
                 infoProducto.appendChild(meta);
 
 
-                /* =====================
-                   CONTROLES
-                ===================== */
-
                 const controles =
                     document.createElement("div");
 
@@ -1247,10 +1240,6 @@ function crearAreas() {
 
                 input.step = "any";
 
-                /*
-                   CORREGIDO:
-                   Fuerza teclado numérico en celulares.
-                */
                 input.inputMode = "numeric";
 
                 input.className =
