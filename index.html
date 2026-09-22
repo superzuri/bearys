@@ -123,8 +123,13 @@ body {
    MODO OSCURO
 ========================= */
 
+/* CORREGIDO:
+   Antes era fixed y flotaba al hacer scroll.
+   Ahora pertenece a la parte superior de la página.
+*/
+
 .modoSuperior {
-    position: fixed;
+    position: absolute;
     top: 15px;
     right: 15px;
     display: flex;
@@ -917,7 +922,7 @@ body.oscuro .btnNueva {
 
 
     <div class="decoracionFinal">
-        Beary´s Coffee Shop 
+        Beary´s Coffee Shop
     </div>
 
 </div>
@@ -1241,6 +1246,12 @@ function crearAreas() {
                 input.min = "0";
 
                 input.step = "any";
+
+                /*
+                   CORREGIDO:
+                   Fuerza teclado numérico en celulares.
+                */
+                input.inputMode = "numeric";
 
                 input.className =
                     "cantidad";
