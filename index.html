@@ -4,9 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Beary's Inventario 🐻</title>
+<title>Beary's Inventario</title>
 
 <style>
+
+/* =========================
+   GENERAL
+========================= */
 
 * {
     box-sizing: border-box;
@@ -14,201 +18,351 @@
 
 body {
     margin: 0;
+    padding: 25px 15px 40px;
     font-family: Arial, sans-serif;
     background: #ffdce8;
-    color: #4b3028;
-    transition: background .3s, color .3s;
+    color: #4b2e25;
+    transition: background-color .4s, color .4s;
+    overflow-x: hidden;
 }
 
-/* Decoración superior */
 
-body::before {
-    content: "🐻  ☕  🐻  ☕  🐻  ☕  🐻  ☕  🐻  ☕  🐻  ☕  🐻  ";
-    display: block;
-    text-align: center;
-    font-size: 18px;
-    letter-spacing: 6px;
-    padding: 12px 0 3px;
-    opacity: .7;
+/* =========================
+   OSITOS DE ARRIBA
+========================= */
+
+.decoracionSuperior {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    height: 34px;
+    margin-bottom: 8px;
+    overflow: hidden;
 }
+
+.decoracionSuperior span {
+    display: inline-block;
+    font-size: 22px;
+    opacity: .8;
+    animation: ositosArriba 3.2s ease-in-out infinite;
+}
+
+.decoracionSuperior span:nth-child(2) {
+    animation-delay: .25s;
+}
+
+.decoracionSuperior span:nth-child(3) {
+    animation-delay: .5s;
+}
+
+.decoracionSuperior span:nth-child(4) {
+    animation-delay: .75s;
+}
+
+.decoracionSuperior span:nth-child(5) {
+    animation-delay: 1s;
+}
+
+.decoracionSuperior span:nth-child(6) {
+    animation-delay: 1.25s;
+}
+
+.decoracionSuperior span:nth-child(7) {
+    animation-delay: 1.5s;
+}
+
+@keyframes ositosArriba {
+
+    0%,100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+
+    25% {
+        transform: translateY(-4px) rotate(-5deg) scale(1.04);
+    }
+
+    50% {
+        transform: translateY(2px) rotate(4deg) scale(.98);
+    }
+
+    75% {
+        transform: translateY(-3px) rotate(-3deg) scale(1.02);
+    }
+}
+
+
+/* =========================
+   CAMBIO DE DECORACION
+========================= */
+
+.decoracionCambio {
+    animation: cambioOsitos .35s ease both;
+}
+
+@keyframes cambioOsitos {
+
+    0% {
+        opacity: .2;
+        transform: translateY(-5px) scale(.94);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(2px) scale(1.04);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 
 /* =========================
    MODO OSCURO
 ========================= */
 
 .modoSuperior {
-    width: 94%;
-    max-width: 650px;
-    margin: 5px auto 0;
+    position: fixed;
+    top: 15px;
+    right: 15px;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
     gap: 7px;
-    color: #70483b;
-    font-size: 12px;
-    font-weight: bold;
+    z-index: 100;
+}
+
+#iconoModo {
+    font-size: 20px;
+    transition: transform .4s;
 }
 
 .interruptor {
     position: relative;
-    width: 42px;
-    height: 23px;
+    width: 48px;
+    height: 26px;
     display: inline-block;
 }
 
 .interruptor input {
-    position: absolute;
     opacity: 0;
-    width: 0 !important;
-    height: 0 !important;
-    margin: 0;
+    width: 0;
+    height: 0;
 }
 
 .slider {
     position: absolute;
     inset: 0;
     cursor: pointer;
-    background: #d9b4c0;
+    background: #b98272;
     border-radius: 30px;
-    transition: .25s;
+    transition: .4s;
 }
 
 .slider::before {
     content: "";
     position: absolute;
-    width: 17px;
-    height: 17px;
+    width: 20px;
+    height: 20px;
     left: 3px;
     top: 3px;
     background: white;
     border-radius: 50%;
-    transition: .25s;
-    box-shadow: 0 2px 5px rgba(0,0,0,.15);
+    transition: .4s;
+    box-shadow: 0 2px 5px rgba(0,0,0,.25);
 }
 
 .interruptor input:checked + .slider {
-    background: #70483b;
+    background: #684338;
 }
 
 .interruptor input:checked + .slider::before {
-    transform: translateX(19px);
+    transform: translateX(22px);
 }
+
 
 /* =========================
    CONTENEDOR
 ========================= */
 
 .contenedor {
-    width: 94%;
     max-width: 650px;
     margin: auto;
-    padding: 5px 0 35px;
 }
 
-/* ENCABEZADO */
+
+/* =========================
+   TITULO
+========================= */
 
 h1 {
     text-align: center;
-    margin: 5px 0 4px;
+    margin: 5px 0 5px;
+    color: #6b3e31;
     font-size: 30px;
-    color: #5b372d;
-    font-weight: 800;
+    animation: tituloEntrada .8s ease both;
 }
 
 .subtitulo {
     text-align: center;
-    color: #8c6258;
-    margin: 0 0 7px;
+    margin: 0 0 5px;
+    color: #81584c;
     font-size: 14px;
+    animation: tituloEntrada .8s .12s ease both;
 }
 
-/* FECHA */
-
-.fecha {
+#fecha {
     text-align: center;
-    color: #a06d7e;
     font-size: 13px;
-    font-weight: bold;
-    margin-bottom: 16px;
+    color: #946c60;
+    margin-bottom: 18px;
+    animation: tituloEntrada .8s .2s ease both;
 }
 
-/* BUSCADOR */
+@keyframes tituloEntrada {
 
-.buscador {
-    position: relative;
-    margin-bottom: 17px;
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.buscador input {
-    width: 100%;
-    height: 48px;
-    padding: 0 16px 0 45px;
-    border: 2px solid #edbfd0;
-    border-radius: 16px;
-    background: #fffafc;
-    color: #5b372d;
-    font-size: 16px;
-    outline: none;
-    box-shadow: 0 4px 10px rgba(111, 70, 60, .08);
-    transition: .2s;
-}
-
-.buscador input::placeholder {
-    color: #b99aa4;
-}
-
-.buscador input:focus {
-    border-color: #d98da8;
-    background: #fff;
-    box-shadow: 0 0 0 3px rgba(217, 141, 168, .18);
-}
-
-.icono-busqueda {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 19px;
-    pointer-events: none;
-}
 
 /* =========================
-   TARJETAS
+   BUSCADOR
+========================= */
+
+.buscador {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.9);
+    box-shadow: 0 5px 15px rgba(120,70,60,.12);
+    font-size: 15px;
+    color: #54342b;
+    margin-bottom: 18px;
+
+    transition:
+        transform .22s,
+        box-shadow .22s,
+        background .22s;
+}
+
+.buscador:focus {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 8px 20px rgba(120,70,60,.18);
+}
+
+.buscador.busquedaActiva {
+    box-shadow:
+        0 7px 20px rgba(120,70,60,.18);
+}
+
+.buscador::placeholder {
+    color: #ad8880;
+}
+
+
+/* =========================
+   AREAS
 ========================= */
 
 .area {
-    background: #fffaf5;
-    border-radius: 22px;
-    padding: 15px;
-    margin-bottom: 17px;
-    border: 2px solid #f1c4d2;
-    box-shadow: 0 5px 14px rgba(111, 70, 60, .10);
+    background: rgba(255,255,255,.94);
+    border-radius: 24px;
+    padding: 16px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 22px rgba(100,55,45,.13);
     overflow: hidden;
-    transition: background .3s, border .3s, box-shadow .3s;
+
+    transition:
+        transform .3s,
+        box-shadow .3s,
+        opacity .2s;
 }
 
-.area h2 {
-    margin: 0 -15px 10px;
-    padding: 13px 15px;
-    font-size: 20px;
-    color: #5b372d;
-    background: #f9e5d9;
-    border-bottom: 2px dashed #e7b9a9;
+.area:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(100,55,45,.18);
 }
 
-/* Colores por sección */
-
-#gris .area h2 {
-    background: #eadfd9;
+#gris .area {
+    animation:
+        tarjetaEntrada
+        .8s
+        .65s
+        cubic-bezier(.22,1,.36,1)
+        both;
 }
 
-#morado .area h2 {
-    background: #f6dbe5;
+#morado .area {
+    animation:
+        tarjetaEntrada
+        .8s
+        1.05s
+        cubic-bezier(.22,1,.36,1)
+        both;
 }
 
-#comida .area h2 {
-    background: #f9e2cf;
+#comida .area {
+    animation:
+        tarjetaEntrada
+        .8s
+        1.45s
+        cubic-bezier(.22,1,.36,1)
+        both;
 }
+
+@keyframes tarjetaEntrada {
+
+    0% {
+        opacity: 0;
+        transform: translateY(45px) scale(.94);
+    }
+
+    55% {
+        opacity: 1;
+        transform: translateY(-7px) scale(1.015);
+    }
+
+    75% {
+        transform: translateY(3px) scale(.997);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =========================
+   TITULOS DE AREA
+========================= */
+
+.tituloArea {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 2px 3px 9px;
+    border-bottom: 2px dashed #efd0d8;
+}
+
+.tituloArea h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #633c32;
+}
+
 
 /* =========================
    PRODUCTOS
@@ -219,156 +373,203 @@ h1 {
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    padding: 10px 2px;
-    border-bottom: 1px dashed #ead5ce;
+    padding: 10px 3px;
+    border-bottom: 1px solid #f3e2e5;
+
+    opacity: 1;
+    transform: translateY(0);
+
+    transition:
+        background .2s,
+        transform .2s,
+        opacity .15s;
 }
 
 .producto:last-child {
     border-bottom: none;
 }
 
-.nombre {
-    flex: 1;
-    min-width: 0;
-    font-size: 16px;
-    font-weight: 600;
-    color: #5a4038;
+.producto:hover {
+    background: #fff5f8;
+    transform: translateX(3px);
 }
 
-.meta {
-    display: block;
-    color: #a1847b;
-    font-size: 11px;
-    font-weight: normal;
-    margin-top: 3px;
-}
 
 /* =========================
-   ZONA DE CANTIDAD
+   NOMBRE + META
 ========================= */
 
-.cantidadZona {
+.infoProducto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 3px;
+    flex: 1;
+    min-width: 0;
+}
+
+.nombre {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.metaProducto {
+    font-size: 12px;
+    font-weight: 600;
+    color: #a47770;
+    opacity: .85;
+    line-height: 1.2;
+}
+
+
+/* =========================
+   CONTROLES
+========================= */
+
+.controlCantidad {
     display: flex;
     align-items: center;
     gap: 7px;
     flex-shrink: 0;
 }
 
+.cantidad {
+    width: 70px;
+    border: 2px solid #ead0d6;
+    background: #fffafb;
+    border-radius: 12px;
+    padding: 8px 7px;
+    text-align: center;
+    outline: none;
+    color: #4d3028;
+    font-size: 14px;
+    transition: .25s;
+}
+
+.cantidad:focus {
+    border-color: #c98294;
+    transform: scale(1.04);
+}
+
+
 /* =========================
-   SEMÁFORO
+   ANIMACION DE BUSQUEDA
+========================= */
+
+.producto.busquedaEntrada {
+    animation: productoBusqueda .18s ease-out both;
+}
+
+@keyframes productoBusqueda {
+
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   SEMAFORO
 ========================= */
 
 .semaforo {
-    width: 13px;
-    height: 13px;
-    min-width: 13px;
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
-    background: #cfc4c7;
-    box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.7),
-        0 1px 4px rgba(92,54,43,.12);
-    transition:
-        background .25s,
-        box-shadow .25s,
-        transform .2s;
+    background: #c7c7c7;
+    flex-shrink: 0;
+    transition: .25s;
 }
-
-/* VERDE */
 
 .semaforo.verde {
-    background: #76c893;
-    box-shadow:
-        0 0 7px rgba(118,200,147,.55),
-        inset 0 1px 2px rgba(255,255,255,.7);
+    background: #62b86f;
+    box-shadow: 0 0 7px rgba(98,184,111,.5);
 }
-
-/* AMARILLO */
 
 .semaforo.amarillo {
-    background: #f2c94c;
-    box-shadow:
-        0 0 7px rgba(242,201,76,.55),
-        inset 0 1px 2px rgba(255,255,255,.7);
+    background: #e8bc55;
+    box-shadow: 0 0 7px rgba(232,188,85,.5);
 }
-
-/* ROJO */
 
 .semaforo.rojo {
-    background: #e57373;
-    box-shadow:
-        0 0 7px rgba(229,115,115,.55),
-        inset 0 1px 2px rgba(255,255,255,.7);
+    background: #df6565;
+    box-shadow: 0 0 7px rgba(223,101,101,.5);
 }
 
-/* =========================
-   INPUTS
-========================= */
-
-input {
-    width: 78px;
-    height: 43px;
-    border: 2px solid #e4c3bb;
-    border-radius: 13px;
-    text-align: center;
-    font-size: 17px;
-    font-weight: bold;
-    color: #5b372d;
-    background: #fff;
-    outline: none;
-    transition: .2s;
+.semaforo.pulse {
+    animation: semaforoPop .25s ease;
 }
 
-input::placeholder {
-    color: #c5aaa2;
-    font-weight: normal;
+@keyframes semaforoPop {
+
+    0% {
+        transform: scale(.6);
+    }
+
+    60% {
+        transform: scale(1.35);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
-input:focus {
-    border-color: #d98da8;
-    background: #fff5f8;
-    box-shadow: 0 0 0 3px rgba(217, 141, 168, .18);
-}
 
 /* =========================
    BOTONES
 ========================= */
 
-.boton {
-    width: 100%;
+.botones {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button {
+    flex: 1;
     border: none;
-    border-radius: 16px;
-    padding: 15px;
-    font-size: 17px;
+    border-radius: 17px;
+    padding: 14px 10px;
+    font-size: 14px;
     font-weight: bold;
-    background: #70483b;
-    color: white;
-    margin-top: 4px;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(92, 54, 43, .18);
-    transition: transform .15s, box-shadow .15s;
+    transition: .2s;
+    box-shadow: 0 6px 14px rgba(100,55,45,.15);
 }
 
-.boton:active {
-    transform: scale(.98);
-    box-shadow: 0 2px 5px rgba(92, 54, 43, .15);
+button:active {
+    transform: scale(.95);
 }
 
-.boton.limpiar {
-    background: #e28da8;
-    margin-top: 10px;
+.btnGenerar {
+    background: #75493c;
+    color: white;
 }
 
-/* =========================
-   MENSAJE
-========================= */
-
-#mensaje {
-    text-align: center;
-    margin-top: 14px;
-    font-weight: bold;
-    color: #70483b;
-    min-height: 22px;
+.btnGenerar:hover {
+    background: #633b31;
+    transform: translateY(-2px);
 }
+
+.btnNueva {
+    background: #f5cbd7;
+    color: #653b31;
+}
+
+.btnNueva:hover {
+    background: #efbdcb;
+    transform: translateY(-2px);
+}
+
 
 /* =========================
    RESULTADO
@@ -376,352 +577,250 @@ input:focus {
 
 #resultado {
     width: 100%;
-    min-height: 130px;
-    margin-top: 12px;
-    padding: 13px;
-    border: 2px solid #edc4d1;
-    border-radius: 15px;
-    font-size: 16px;
-    color: #5b372d;
-    background: #fffafc;
-    resize: vertical;
-    display: none;
+    min-height: 140px;
+    margin-top: 16px;
+    padding: 15px;
+    border: none;
     outline: none;
+    resize: vertical;
+    border-radius: 18px;
+    background: rgba(255,255,255,.9);
+    color: #4d3028;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    box-shadow: 0 5px 15px rgba(100,55,45,.12);
+    transition: .3s;
 }
 
+#mensaje {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #70483c;
+    min-height: 20px;
+}
+
+
 /* =========================
-   ANIMACIÓN CENTRAL
+   OSITO ANIMADO
 ========================= */
 
 #animacionOso {
     position: fixed;
-    top: 50%;
     left: 50%;
-
-    transform:
-        translate(-50%, -50%)
-        scale(0);
-
-    z-index: 9999;
-
-    background: rgba(255, 250, 252, .97);
-
-    border: 3px solid #f1c4d2;
-
-    border-radius: 28px;
-
-    padding: 25px 35px;
-
-    text-align: center;
-
-    box-shadow:
-        0 12px 35px rgba(92, 54, 43, .25);
-
+    top: 50%;
+    transform: translate(-50%,-50%) scale(.5);
     opacity: 0;
-
     pointer-events: none;
+    z-index: 999;
+    text-align: center;
+    transition: .3s;
 }
 
 #animacionOso.mostrar {
-    animation: aparecerOso 1.5s ease forwards;
+    opacity: 1;
+    transform: translate(-50%,-50%) scale(1);
 }
 
 .osoAnimado {
-    font-size: 65px;
-    line-height: 1;
-    animation: brincarOso 1.5s ease;
+    font-size: 80px;
+    animation: osoSalta .8s ease-in-out infinite;
+    filter: drop-shadow(0 8px 8px rgba(0,0,0,.18));
 }
 
 .textoOso {
-    margin-top: 12px;
-    font-size: 17px;
+    background: white;
+    color: #694237;
+    padding: 10px 18px;
+    border-radius: 20px;
+    margin-top: 4px;
     font-weight: bold;
-    color: #70483b;
+    box-shadow: 0 6px 20px rgba(0,0,0,.18);
 }
+
+@keyframes osoSalta {
+
+    0%,100% {
+        transform: translateY(0) rotate(-3deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(3deg);
+    }
+}
+
 
 /* =========================
-   ANIMACIONES
+   DECORACION FINAL
 ========================= */
 
-@keyframes aparecerOso {
-
-    0% {
-        opacity: 0;
-        transform:
-            translate(-50%, -50%)
-            scale(.3);
-    }
-
-    20% {
-        opacity: 1;
-        transform:
-            translate(-50%, -50%)
-            scale(1.12);
-    }
-
-    35% {
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-    }
-
-    75% {
-        opacity: 1;
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-    }
-
-    100% {
-        opacity: 0;
-        transform:
-            translate(-50%, -50%)
-            scale(.85);
-    }
-}
-
-@keyframes brincarOso {
-
-    0% {
-        transform:
-            translateY(15px)
-            rotate(-8deg);
-    }
-
-    25% {
-        transform:
-            translateY(-10px)
-            rotate(8deg);
-    }
-
-    45% {
-        transform:
-            translateY(0)
-            rotate(-5deg);
-    }
-
-    65% {
-        transform:
-            translateY(-5px)
-            rotate(4deg);
-    }
-
-    100% {
-        transform:
-            translateY(0)
-            rotate(0);
-    }
-}
-
-/* =========================
-   PIE
-========================= */
-
-.contenedor::after {
-    content: "Beary's Coffee Shop";
-    display: block;
+.decoracionFinal {
     text-align: center;
-    color: #9b6c61;
-    font-size: 12px;
-    margin-top: 20px;
+    margin-top: 22px;
+    font-size: 22px;
+    opacity: .8;
+    animation: decoracionFinalAnim 3s ease-in-out infinite;
 }
 
-/* =====================================================
+@keyframes decoracionFinalAnim {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+
+/* =========================
    MODO OSCURO
-===================================================== */
+========================= */
 
 body.oscuro {
-    background: #20191c;
-    color: #f3e8eb;
+    background: #24191c;
+    color: #f5e5e8;
 }
 
 body.oscuro h1 {
-    color: #ffe0ea;
+    color: #ffd2df;
 }
 
-body.oscuro .subtitulo {
-    color: #d5aeb9;
+body.oscuro .subtitulo,
+body.oscuro #fecha {
+    color: #d5afb9;
 }
 
-body.oscuro .fecha {
-    color: #d99aad;
+body.oscuro .buscador {
+    background: #38272b;
+    color: #f7e9ec;
+    box-shadow: 0 5px 15px rgba(0,0,0,.3);
 }
 
-body.oscuro .modoSuperior {
-    color: #f0cbd5;
-}
-
-body.oscuro .buscador input {
-    background: #2d2428;
-    color: #f7e9ed;
-    border-color: #61454e;
-}
-
-body.oscuro .buscador input::placeholder {
-    color: #a98d96;
-}
-
-body.oscuro .buscador input:focus {
-    background: #34292e;
-    border-color: #d98da8;
+body.oscuro .buscador::placeholder {
+    color: #aa8991;
 }
 
 body.oscuro .area {
-    background: #2a2225;
-    border-color: #604650;
-    box-shadow: 0 5px 14px rgba(0,0,0,.25);
+    background: #302125;
+    box-shadow: 0 8px 22px rgba(0,0,0,.35);
 }
 
-body.oscuro .area h2 {
-    color: #ffe8ee;
-    background: #3a2d31;
-    border-bottom-color: #6b4a55;
+body.oscuro .tituloArea {
+    border-color: #53383e;
 }
 
-body.oscuro #gris .area h2 {
-    background: #383033;
-}
-
-body.oscuro #morado .area h2 {
-    background: #3b2b33;
-}
-
-body.oscuro #comida .area h2 {
-    background: #3b3029;
+body.oscuro .tituloArea h2 {
+    color: #ffd6df;
 }
 
 body.oscuro .producto {
-    border-bottom-color: #4a393f;
+    border-color: #493339;
 }
 
-body.oscuro .nombre {
-    color: #f3e6e9;
+body.oscuro .producto:hover {
+    background: #39282d;
 }
 
-body.oscuro .meta {
-    color: #b89da5;
+body.oscuro .cantidad {
+    background: #261a1e;
+    border-color: #5a3c44;
+    color: #f7e9ec;
 }
 
-body.oscuro input {
-    background: #342b2f;
-    color: #fff0f4;
-    border-color: #604952;
-}
-
-body.oscuro input::placeholder {
-    color: #9d858c;
-}
-
-body.oscuro input:focus {
-    background: #3c3035;
-    border-color: #d98da8;
-}
-
-body.oscuro .boton {
-    background: #8c5b6d;
-}
-
-body.oscuro .boton.limpiar {
-    background: #b96d88;
-}
-
-body.oscuro #mensaje {
-    color: #f1c4d2;
+body.oscuro .metaProducto {
+    color: #d2aeb8;
 }
 
 body.oscuro #resultado {
-    background: #2d2428;
-    color: #f8e9ee;
-    border-color: #624651;
+    background: #38272b;
+    color: #f7e9ec;
 }
 
-body.oscuro #animacionOso {
-    background: rgba(45, 36, 40, .98);
-    border-color: #805465;
-    box-shadow: 0 12px 35px rgba(0,0,0,.45);
+body.oscuro #mensaje {
+    color: #e6bec9;
 }
 
-body.oscuro .textoOso {
-    color: #ffdce8;
+body.oscuro .btnNueva {
+    background: #52343d;
+    color: #ffdce5;
 }
 
-body.oscuro .contenedor::after {
-    color: #c08d9c;
-}
 
-/* CELULAR */
+/* =========================
+   MOVIL
+========================= */
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
 
-    body::before {
-        font-size: 16px;
-        letter-spacing: 4px;
+    body {
+        padding: 18px 10px 35px;
+    }
+
+    .decoracionSuperior {
+        gap: 9px;
+    }
+
+    .decoracionSuperior span {
+        font-size: 17px;
     }
 
     .modoSuperior {
-        width: 96%;
-        margin-top: 3px;
-    }
-
-    .contenedor {
-        width: 96%;
-        padding-top: 4px;
+        top: 10px;
+        right: 10px;
     }
 
     h1 {
-        font-size: 27px;
+        font-size: 26px;
+        padding-top: 5px;
     }
 
     .subtitulo {
         font-size: 13px;
-        padding: 0 8px;
-    }
-
-    .fecha {
-        font-size: 12px;
-    }
-
-    .buscador input {
-        height: 46px;
     }
 
     .area {
-        padding: 12px;
-        border-radius: 19px;
-    }
-
-    .area h2 {
-        margin-left: -12px;
-        margin-right: -12px;
-        padding: 12px;
-        font-size: 18px;
-    }
-
-    .producto {
-        padding: 10px 0;
+        padding: 13px;
+        border-radius: 21px;
     }
 
     .nombre {
-        font-size: 15px;
+        font-size: 13px;
     }
 
-    .cantidadZona {
-        gap: 6px;
+    .metaProducto {
+        font-size: 11px;
     }
 
-    .semaforo {
-        width: 12px;
-        height: 12px;
-        min-width: 12px;
+    .cantidad {
+        width: 64px;
     }
 
-    input {
-        width: 74px;
-        height: 42px;
+    .botones {
+        flex-direction: column;
     }
 
-    .boton {
-        padding: 15px 10px;
+    button {
+        width: 100%;
+    }
+}
+
+
+/* =========================
+   REDUCCION DE MOVIMIENTO
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
     }
 }
 
@@ -730,11 +829,23 @@ body.oscuro .contenedor::after {
 
 <body>
 
-<!-- MODO OSCURO -->
+<div
+    class="decoracionSuperior"
+    id="decoracionSuperior"
+>
+    <span>🐻</span>
+    <span>☕</span>
+    <span>🐻</span>
+    <span>☕</span>
+    <span>🐻</span>
+    <span>☕</span>
+    <span>🐻</span>
+</div>
+
 
 <div class="modoSuperior">
 
-    <span>☀️</span>
+    <span id="iconoModo">🌙</span>
 
     <label class="interruptor">
 
@@ -747,8 +858,6 @@ body.oscuro .contenedor::after {
 
     </label>
 
-    <span>🌙</span>
-
 </div>
 
 
@@ -756,35 +865,21 @@ body.oscuro .contenedor::after {
 
     <h1>🐻 Beary's Inventario 🐻</h1>
 
-    <p class="subtitulo">
+    <div class="subtitulo">
         ☕ Inventario diario · Escribe cuánto tienes físicamente
-    </p>
-
-    <div
-        class="fecha"
-        id="fecha"
-    ></div>
-
-
-    <!-- BUSCADOR -->
-
-    <div class="buscador">
-
-        <span class="icono-busqueda">
-            🔎
-        </span>
-
-        <input
-            type="text"
-            id="buscador"
-            placeholder="Buscar producto..."
-            autocomplete="off"
-        >
-
     </div>
 
+    <div id="fecha"></div>
 
-    <!-- ÁREAS -->
+
+    <input
+        type="text"
+        id="buscador"
+        class="buscador"
+        placeholder="🔎 Buscar producto..."
+        autocomplete="off"
+    >
+
 
     <div id="gris"></div>
 
@@ -793,34 +888,40 @@ body.oscuro .contenedor::after {
     <div id="comida"></div>
 
 
-    <!-- BOTONES -->
+    <div class="botones">
 
-    <button
-        class="boton"
-        onclick="generarYCopiar()"
-    >
-        📋 Generar y copiar lista
-    </button>
+        <button
+            class="btnGenerar"
+            onclick="generarYCopiar()"
+        >
+            📋 Generar y copiar lista
+        </button>
 
-    <button
-        class="boton limpiar"
-        onclick="nuevaLista()"
-    >
-        🧹 Nueva lista
-    </button>
+        <button
+            class="btnNueva"
+            onclick="nuevaLista()"
+        >
+            🧹 Nueva lista
+        </button>
+
+    </div>
 
 
     <div id="mensaje"></div>
 
     <textarea
         id="resultado"
+        placeholder="Aquí aparecerá tu lista de faltantes..."
         readonly
     ></textarea>
 
+
+    <div class="decoracionFinal">
+        Bearys Coffee Shop 
+    </div>
+
 </div>
 
-
-<!-- ANIMACIÓN -->
 
 <div id="animacionOso">
 
@@ -829,7 +930,7 @@ body.oscuro .contenedor::after {
     </div>
 
     <div class="textoOso">
-        ¡Lista copiada!
+        ¡Lista copiada! ✨
     </div>
 
 </div>
@@ -843,178 +944,180 @@ body.oscuro .contenedor::after {
 
 const productos = [
 
-    /* BODEGA, REFRI Y LIMPIEZA */
+    /* BODEGA */
 
-    {"name":"Jabón de trastes","target":1.0,"group":"gris"},
-    {"name":"Jabón de manos","target":1.0,"group":"gris"},
-    {"name":"Guantes para Baño","target":1.0,"group":"gris"},
-    {"name":"Guantes para horno","target":1.0,"group":"gris"},
-    {"name":"Esponja de carita","target":3.0,"group":"gris"},
-    {"name":"Esponja para vasos","target":3.0,"group":"gris"},
-    {"name":"Fibra de acero","target":1.0,"group":"gris"},
-    {"name":"Fibra verde","target":1.0,"group":"gris"},
-    {"name":"Piedra pómez","target":1.0,"group":"gris"},
-    {"name":"Fabuloso","target":1.0,"group":"gris"},
-    {"name":"Kalan","target":1.0,"group":"gris"},
-    {"name":"Cloro","target":1.0,"group":"gris"},
-    {"name":"Ajax de baño","target":1.0,"group":"gris"},
-    {"name":"Ajax limón","target":1.0,"group":"gris"},
-    {"name":"Aromatizante","target":1.0,"group":"gris"},
-    {"name":"Windex","target":1.0,"group":"gris"},
-    {"name":"Drano","target":1.0,"group":"gris"},
-    {"name":"Mechudo","target":1.0,"group":"gris"},
-    {"name":"Palitos de madera","target":1.0,"group":"gris"},
-    {"name":"Cafiza","target":1.0,"group":"gris"},
-    {"name":"Tenedores desechables","target":2.0,"group":"gris"},
-    {"name":"Cucharas desechables","target":2.0,"group":"gris"},
-    {"name":"Popotes","target":1.0,"group":"gris"},
-    {"name":"Bolsas chicas de basura","target":2.0,"group":"gris"},
-    {"name":"Bolsas grandes de basura","target":1.0,"group":"gris"},
-    {"name":"Mangas","target":7.0,"group":"gris"},
-    {"name":"Papel de baño","target":8.0,"group":"gris"},
-    {"name":"Café","target":2.0,"group":"gris"},
-    {"name":"Vasos de 16 oz","target":4.0,"group":"gris"},
-    {"name":"Vasos de 12 oz","target":5.0,"group":"gris"},
-    {"name":"Vasos transparentes","target":5.0,"group":"gris"},
-    {"name":"Vasos de 10 oz","target":1.0,"group":"gris"},
-    {"name":"Vasos de espresso","target":1.0,"group":"gris"},
-    {"name":"Azúcar","target":1.0,"group":"gris"},
-    {"name":"Splenda","target":1.0,"group":"gris"},
-    {"name":"Stevia","target":1.0,"group":"gris"},
-    {"name":"Guantes","target":1.0,"group":"gris"},
-    {"name":"Servilletas","target":2.0,"group":"gris"},
-    {"name":"Servitoallas","target":2.0,"group":"gris"},
-    {"name":"Sanitas","target":3.0,"group":"gris"},
-    {"name":"Azúcar mascabado","target":1.0,"group":"gris"},
-    {"name":"Charolas chicas","target":1.0,"group":"gris"},
-    {"name":"Charolas grandes","target":1.0,"group":"gris"},
-    {"name":"Mangas desechables","target":4.0,"group":"gris"},
-    {"name":"Bolsas para pollo y cochinita","target":3.0,"group":"gris"},
-    {"name":"Rejillas","target":30.0,"group":"gris"},
-    {"name":"Totopos","target":16.0,"group":"gris"},
-    {"name":"Frijoles","target":1.0,"group":"gris"},
-    {"name":"Té de frutos","target":1.0,"group":"gris"},
-    {"name":"Té fresa/vainilla","target":1.0,"group":"gris"},
-    {"name":"Té verde","target":1.0,"group":"gris"},
-    {"name":"Té Earl Grey","target":1.0,"group":"gris"},
-    {"name":"Té English","target":1.0,"group":"gris"},
-    {"name":"Té mango/fresa","target":1.0,"group":"gris"},
-    {"name":"Té limón","target":1.0,"group":"gris"},
-    {"name":"Té limón/jengibre","target":1.0,"group":"gris"},
-    {"name":"Té manzanilla","target":1.0,"group":"gris"},
-    {"name":"Té manzanilla/vainilla","target":1.0,"group":"gris"},
-    {"name":"Té de granada","target":1.0,"group":"gris"},
-    {"name":"Helado de cookie and cream","target":10.0,"group":"gris"},
-    {"name":"Helado de vainilla","target":4.0,"group":"gris"},
-    {"name":"Helado de chocolate","target":4.0,"group":"gris"},
-    {"name":"Helado de fresa","target":10.0,"group":"gris"},
-    {"name":"Harina de waffles","target":1.0,"group":"gris"},
-    {"name":"Jamón","target":2.0,"group":"gris"},
-    {"name":"Tocino en trozos","target":2.0,"group":"gris"},
-    {"name":"Tocino en tiras","target":1.0,"group":"gris"},
-    {"name":"Jitomate","target":20.0,"group":"gris"},
-    {"name":"Cebolla","target":4.0,"group":"gris"},
-    {"name":"Lechuga","target":3.0,"group":"gris"},
-    {"name":"Limón","target":10.0,"group":"gris"},
-    {"name":"Chile serrano","target":20.00,"group":"gris"},
-    {"name":"Manzana","target":4.0,"group":"gris"},
-    {"name":"Relleno de dulce de leche","target":2.0,"group":"gris"},
-    {"name":"Relleno de chocolate","target":2.0,"group":"gris"},
-    {"name":"Relleno de mascarpone","target":2.0,"group":"gris"},
-    {"name":"Relleno de frutos rojos","target":2.0,"group":"gris"},
-    {"name":"Salsa verde","target":10.0,"group":"gris"},
-    {"name":"Salsa roja","target":10.0,"group":"gris"},
-    {"name":"Cochinita","target":2.0,"group":"gris"},
-    {"name":"Pollo","target":2.0,"group":"gris"},
-    {"name":"Crema","target":2.0,"group":"gris"},
-    {"name":"Crema batida","target":2.0,"group":"gris"},
-    {"name":"Papas","target":2.0,"group":"gris"},
+    { nombre:"Jabón de trastes", objetivo:1, group:"gris" },
+    { nombre:"Jabón de manos", objetivo:1, group:"gris" },
+    { nombre:"Guantes para Baño", objetivo:1, group:"gris" },
+    { nombre:"Guantes para horno", objetivo:1, group:"gris" },
+    { nombre:"Esponja de carita", objetivo:3, group:"gris" },
+    { nombre:"Esponja para vasos", objetivo:3, group:"gris" },
+    { nombre:"Fibra de acero", objetivo:1, group:"gris" },
+    { nombre:"Fibra verde", objetivo:1, group:"gris" },
+    { nombre:"Piedra pómez", objetivo:1, group:"gris" },
+    { nombre:"Fabuloso", objetivo:1, group:"gris" },
+    { nombre:"Kalan", objetivo:1, group:"gris" },
+    { nombre:"Cloro", objetivo:1, group:"gris" },
+    { nombre:"Ajax de baño", objetivo:1, group:"gris" },
+    { nombre:"Ajax limón", objetivo:1, group:"gris" },
+    { nombre:"Aromatizante", objetivo:1, group:"gris" },
+    { nombre:"Windex", objetivo:1, group:"gris" },
+    { nombre:"Drano", objetivo:1, group:"gris" },
+    { nombre:"Mechudo", objetivo:1, group:"gris" },
+    { nombre:"Palitos de madera", objetivo:1, group:"gris" },
+    { nombre:"Cafiza", objetivo:1, group:"gris" },
+    { nombre:"Tenedores desechables", objetivo:2, group:"gris" },
+    { nombre:"Cucharas desechables", objetivo:2, group:"gris" },
+    { nombre:"Popotes", objetivo:1, group:"gris" },
+    { nombre:"Bolsas chicas de basura", objetivo:2, group:"gris" },
+    { nombre:"Bolsas grandes de basura", objetivo:1, group:"gris" },
+    { nombre:"Mangas", objetivo:7, group:"gris" },
+    { nombre:"Papel de baño", objetivo:8, group:"gris" },
+    { nombre:"Café", objetivo:2, group:"gris" },
+    { nombre:"Vasos de 16 oz", objetivo:4, group:"gris" },
+    { nombre:"Vasos de 12 oz", objetivo:5, group:"gris" },
+    { nombre:"Vasos transparentes", objetivo:5, group:"gris" },
+    { nombre:"Vasos de 10 oz", objetivo:1, group:"gris" },
+    { nombre:"Vasos de espresso", objetivo:1, group:"gris" },
+    { nombre:"Azúcar", objetivo:1, group:"gris" },
+    { nombre:"Splenda", objetivo:1, group:"gris" },
+    { nombre:"Stevia", objetivo:1, group:"gris" },
+    { nombre:"Guantes", objetivo:1, group:"gris" },
+    { nombre:"Servilletas", objetivo:2, group:"gris" },
+    { nombre:"Servitoallas", objetivo:2, group:"gris" },
+    { nombre:"Sanitas", objetivo:3, group:"gris" },
+    { nombre:"Azúcar mascabado", objetivo:1, group:"gris" },
+    { nombre:"Charolas chicas", objetivo:1, group:"gris" },
+    { nombre:"Charolas grandes", objetivo:1, group:"gris" },
+    { nombre:"Mangas desechables", objetivo:4, group:"gris" },
+    { nombre:"Bolsas para pollo y cochinita", objetivo:3, group:"gris" },
+    { nombre:"Rejillas", objetivo:30, group:"gris" },
+    { nombre:"Totopos", objetivo:16, group:"gris" },
+    { nombre:"Frijoles", objetivo:1, group:"gris" },
+    { nombre:"Té de frutos", objetivo:1, group:"gris" },
+    { nombre:"Té fresa/vainilla", objetivo:1, group:"gris" },
+    { nombre:"Té verde", objetivo:1, group:"gris" },
+    { nombre:"Té Earl Grey", objetivo:1, group:"gris" },
+    { nombre:"Té English", objetivo:1, group:"gris" },
+    { nombre:"Té mango/fresa", objetivo:1, group:"gris" },
+    { nombre:"Té limón", objetivo:1, group:"gris" },
+    { nombre:"Té limón/jengibre", objetivo:1, group:"gris" },
+    { nombre:"Té manzanilla", objetivo:1, group:"gris" },
+    { nombre:"Té manzanilla/vainilla", objetivo:1, group:"gris" },
+    { nombre:"Té de granada", objetivo:1, group:"gris" },
+    { nombre:"Helado de cookie and cream", objetivo:10, group:"gris" },
+    { nombre:"Helado de vainilla", objetivo:4, group:"gris" },
+    { nombre:"Helado de chocolate", objetivo:4, group:"gris" },
+    { nombre:"Helado de fresa", objetivo:10, group:"gris" },
+    { nombre:"Harina de waffles", objetivo:1, group:"gris" },
+    { nombre:"Jamón", objetivo:2, group:"gris" },
+    { nombre:"Tocino en trozos", objetivo:2, group:"gris" },
+    { nombre:"Tocino en tiras", objetivo:1, group:"gris" },
+    { nombre:"Jitomate", objetivo:20, group:"gris" },
+    { nombre:"Cebolla", objetivo:4, group:"gris" },
+    { nombre:"Lechuga", objetivo:3, group:"gris" },
+    { nombre:"Limón", objetivo:10, group:"gris" },
+    { nombre:"Chile serrano", objetivo:20, group:"gris" },
+    { nombre:"Manzana", objetivo:4, group:"gris" },
+    { nombre:"Relleno de dulce de leche", objetivo:2, group:"gris" },
+    { nombre:"Relleno de chocolate", objetivo:2, group:"gris" },
+    { nombre:"Relleno de mascarpone", objetivo:2, group:"gris" },
+    { nombre:"Relleno de frutos rojos", objetivo:2, group:"gris" },
+    { nombre:"Salsa verde", objetivo:10, group:"gris" },
+    { nombre:"Salsa roja", objetivo:10, group:"gris" },
+    { nombre:"Cochinita", objetivo:2, group:"gris" },
+    { nombre:"Pollo", objetivo:2, group:"gris" },
+    { nombre:"Crema", objetivo:2, group:"gris" },
+    { nombre:"Crema batida", objetivo:2, group:"gris" },
+    { nombre:"Papas", objetivo:2, group:"gris" },
+
 
     /* BEBIDAS */
 
-    {"name":"Coca","target":7.0,"group":"morado"},
-    {"name":"Coca zero","target":5.0,"group":"morado"},
-    {"name":"Coca light","target":5.0,"group":"morado"},
-    {"name":"Sprite","target":4.0,"group":"morado"},
-    {"name":"Mundet","target":4.0,"group":"morado"},
-    {"name":"Flanes","target":5.0,"group":"morado"},
-    {"name":"Bolsas de pan","target":1.0,"group":"morado"},
-    {"name":"Bolsas grandes","target":40.0,"group":"morado"},
-    {"name":"Agua Santa María","target":7.0,"group":"morado"},
-    {"name":"Topochico","target":6.0,"group":"morado"},
-    {"name":"Vasos para porciones (llevar)","target":1.0,"group":"morado"},
-    {"name":"Tapas para porciones (llevar)","target":1.0,"group":"morado"},
-    {"name":"Papel encerado","target":1.0,"group":"morado"},
-    {"name":"Turín","target":1.0,"group":"morado"},
-    {"name":"Chai","target":1.0,"group":"morado"},
-    {"name":"Chai Mango","target":1.0,"group":"morado"},
-    {"name":"Taro","target":1.0,"group":"morado"},
-    {"name":"Matcha","target":1.0,"group":"morado"},
-    {"name":"Galleta Oreo","target":3.0,"group":"morado"},
-    {"name":"Suavicremas","target":2.0,"group":"morado"},
-    {"name":"Galleta Lotus","target":4.0,"group":"morado"},
-    {"name":"Chocolate Abuelita","target":3.0,"group":"morado"},
-    {"name":"Chocolate de decoración","target":1.0,"group":"morado"},
-    {"name":"Café descafeinado","target":1.0,"group":"morado"},
-    {"name":"Cajeta","target":4.0,"group":"morado"},
-    {"name":"Crema Lotus","target":1.0,"group":"morado"},
-    {"name":"Nutella","target":4.0,"group":"morado"},
-    {"name":"Tarjetas de cortesía","target":1.0,"group":"morado"},
-    {"name":"Etiquetas","target":1.0,"group":"morado"},
+    { nombre:"Coca", objetivo:7, group:"morado" },
+    { nombre:"Coca zero", objetivo:5, group:"morado" },
+    { nombre:"Coca light", objetivo:5, group:"morado" },
+    { nombre:"Sprite", objetivo:4, group:"morado" },
+    { nombre:"Mundet", objetivo:4, group:"morado" },
+    { nombre:"Flanes", objetivo:5, group:"morado" },
+    { nombre:"Bolsas de pan", objetivo:1, group:"morado" },
+    { nombre:"Bolsas grandes", objetivo:40, group:"morado" },
+    { nombre:"Agua Santa María", objetivo:7, group:"morado" },
+    { nombre:"Topochico", objetivo:6, group:"morado" },
+    { nombre:"Vasos para porciones (llevar)", objetivo:1, group:"morado" },
+    { nombre:"Tapas para porciones (llevar)", objetivo:1, group:"morado" },
+    { nombre:"Papel encerado", objetivo:1, group:"morado" },
+    { nombre:"Turín", objetivo:1, group:"morado" },
+    { nombre:"Chai", objetivo:1, group:"morado" },
+    { nombre:"Chai Mango", objetivo:1, group:"morado" },
+    { nombre:"Taro", objetivo:1, group:"morado" },
+    { nombre:"Matcha", objetivo:1, group:"morado" },
+    { nombre:"Galleta Oreo", objetivo:3, group:"morado" },
+    { nombre:"Suavicremas", objetivo:2, group:"morado" },
+    { nombre:"Galleta Lotus", objetivo:4, group:"morado" },
+    { nombre:"Chocolate Abuelita", objetivo:3, group:"morado" },
+    { nombre:"Chocolate de decoración", objetivo:1, group:"morado" },
+    { nombre:"Café descafeinado", objetivo:1, group:"morado" },
+    { nombre:"Cajeta", objetivo:4, group:"morado" },
+    { nombre:"Crema Lotus", objetivo:1, group:"morado" },
+    { nombre:"Nutella", objetivo:4, group:"morado" },
+    { nombre:"Tarjetas de lealtad", objetivo:1, group:"morado" },
+    { nombre:"Etiquetas", objetivo:1, group:"morado" },
+
 
     /* COMIDA */
 
-    {"name":"Mayonesa","target":1.0,"group":"comida"},
-    {"name":"Mostaza","target":1.0,"group":"comida"},
-    {"name":"Papaya","target":1.0,"group":"comida"},
-    {"name":"Aguacate","target":18.0,"group":"comida"},
-    {"name":"Salsa Maggi","target":1.0,"group":"comida"},
-    {"name":"Salsa inglesa","target":1.0,"group":"comida"},
-    {"name":"Salsa matcha","target":1.0,"group":"comida"},
-    {"name":"Salsa Valentina","target":1.0,"group":"comida"},
-    {"name":"Catsup","target":1.0,"group":"comida"},
-    {"name":"Granola","target":1.0,"group":"comida"},
-    {"name":"Miel","target":1.0,"group":"comida"},
-    {"name":"Maple","target":1.0,"group":"comida"},
-    {"name":"Sal","target":1.0,"group":"comida"},
-    {"name":"Galletas de cortesia","target":1.0,"group":"comida"},
-    {"name":"Galletas de Limón","target":5.0,"group":"comida"},
-    {"name":"Galletas de Pistache","target":5.0,"group":"comida"},
-    {"name":"Huevo","target":3.0,"group":"comida"},
-    {"name":"Comandas","target":5.0,"group":"comida"},
-    {"name":"Tartas","target":30.0,"group":"comida"},
-    {"name":"Leche deslactosada","target":24.0,"group":"comida"},
-    {"name":"Leche entera","target":15.0,"group":"comida"},
-    {"name":"Leche light","target":6.0,"group":"comida"},
-    {"name":"Leche deslactosada light","target":6.0,"group":"comida"},
-    {"name":"Leche de almendra","target":4.0,"group":"comida"},
-    {"name":"Leche de coco","target":3.0,"group":"comida"},
-    {"name":"Leche de avena","target":4.0,"group":"comida"},
-    {"name":"Leche de soya","target":4.0,"group":"comida"},
-    {"name":"Concentrado de fresa","target":2.0,"group":"comida"},
-    {"name":"Concentrado de maracuya","target":2.0,"group":"comida"},
-    {"name":"Concentrado de mango","target":2.0,"group":"comida"},
-    {"name":"Pink lemonade","target":2.0,"group":"comida"},
-    {"name":"Caramelo","target":1.0,"group":"comida"},
-    {"name":"Tortillas","target":1.0,"group":"comida"},
-    {"name":"Chapatas","target":20.0,"group":"comida"},
-    {"name":"Croissant","target":15.0,"group":"comida"},
-    {"name":"Trapos limpios","target":50.0,"group":"comida"},
-    {"name":"Bolsa para trapos","target":1.0,"group":"comida"},
-    {"name":"Bombas de chocolate","target":3.0,"group":"comida"},
-    {"name":"Velcro","target":1.0,"group":"comida"},
-    {"name":"Osos para bebidas","target":1.0,"group":"comida"},
-    {"name":"Osos grandes","target":10.0,"group":"comida"},
-    {"name":"Vaso Beary rosa","target":10.0,"group":"comida"},
-    {"name":"Vaso Beary rojo","target":10.0,"group":"comida"},
-    {"name":"Limpiador de horno","target":1.0,"group":"comida"},
-    {"name":"Protector de horno","target":1.0,"group":"comida"}
+    { nombre:"Mayonesa", objetivo:1, group:"comida" },
+    { nombre:"Mostaza", objetivo:1, group:"comida" },
+    { nombre:"Papaya", objetivo:1, group:"comida" },
+    { nombre:"Aguacate", objetivo:18, group:"comida" },
+    { nombre:"Salsa Maggi", objetivo:1, group:"comida" },
+    { nombre:"Salsa inglesa", objetivo:1, group:"comida" },
+    { nombre:"Salsa matcha", objetivo:1, group:"comida" },
+    { nombre:"Salsa Valentina", objetivo:1, group:"comida" },
+    { nombre:"Catsup", objetivo:1, group:"comida" },
+    { nombre:"Granola", objetivo:1, group:"comida" },
+    { nombre:"Miel", objetivo:1, group:"comida" },
+    { nombre:"Maple", objetivo:1, group:"comida" },
+    { nombre:"Sal", objetivo:1, group:"comida" },
+    { nombre:"Galletas de cortesia", objetivo:1, group:"comida" },
+    { nombre:"Galletas de Limón", objetivo:5, group:"comida" },
+    { nombre:"Galletas de Pistache", objetivo:5, group:"comida" },
+    { nombre:"Huevo", objetivo:3, group:"comida" },
+    { nombre:"Comandas", objetivo:5, group:"comida" },
+    { nombre:"Tartas", objetivo:30, group:"comida" },
+    { nombre:"Leche deslactosada", objetivo:24, group:"comida" },
+    { nombre:"Leche entera", objetivo:15, group:"comida" },
+    { nombre:"Leche light", objetivo:6, group:"comida" },
+    { nombre:"Leche deslactosada light", objetivo:6, group:"comida" },
+    { nombre:"Leche de almendra", objetivo:4, group:"comida" },
+    { nombre:"Leche de coco", objetivo:3, group:"comida" },
+    { nombre:"Leche de avena", objetivo:4, group:"comida" },
+    { nombre:"Leche de soya", objetivo:4, group:"comida" },
+    { nombre:"Concentrado de fresa", objetivo:2, group:"comida" },
+    { nombre:"Concentrado de maracuya", objetivo:2, group:"comida" },
+    { nombre:"Concentrado de mango", objetivo:2, group:"comida" },
+    { nombre:"Pink lemonade", objetivo:2, group:"comida" },
+    { nombre:"Caramelo", objetivo:1, group:"comida" },
+    { nombre:"Tortillas", objetivo:1, group:"comida" },
+    { nombre:"Chapatas", objetivo:20, group:"comida" },
+    { nombre:"Croissant", objetivo:15, group:"comida" },
+    { nombre:"Trapos limpios", objetivo:50, group:"comida" },
+    { nombre:"Bolsa para trapos", objetivo:1, group:"comida" },
+    { nombre:"Bombas de chocolate", objetivo:3, group:"comida" },
+    { nombre:"Velcro", objetivo:1, group:"comida" },
+    { nombre:"Osos para bebidas", objetivo:1, group:"comida" },
+    { nombre:"Osos grandes", objetivo:10, group:"comida" },
+    { nombre:"Vaso Beary rosa", objetivo:10, group:"comida" },
+    { nombre:"Vaso Beary rojo", objetivo:10, group:"comida" },
+    { nombre:"Limpiador de horno", objetivo:1, group:"comida" },
+    { nombre:"Protector de horno", objetivo:1, group:"comida" }
 
 ];
 
 
 /* =====================================================
-   NOMBRES DE ÁREAS
+   NOMBRES DE AREAS
 ===================================================== */
 
 const nombresAreas = {
@@ -1029,148 +1132,63 @@ const nombresAreas = {
 
 
 /* =====================================================
-   FECHA
+   CREAR AREAS
 ===================================================== */
 
-function mostrarFecha() {
+function crearAreas() {
 
-    const fecha = new Date();
+    const grupos = {
 
-    const opciones = {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric"
+        gris: document.getElementById("gris"),
+
+        morado: document.getElementById("morado"),
+
+        comida: document.getElementById("comida")
+
     };
 
-    let texto =
-        fecha.toLocaleDateString(
-            "es-MX",
-            opciones
-        );
 
-    texto =
-        texto.charAt(0).toUpperCase() +
-        texto.slice(1);
+    Object.keys(grupos).forEach(group => {
 
-    document.getElementById("fecha").textContent =
-        "📅 " + texto;
-}
+        const area = document.createElement("div");
 
-mostrarFecha();
+        area.className = "area";
 
 
-/* =====================================================
-   NÚMERO BONITO
-===================================================== */
+        const titulo = document.createElement("div");
 
-function numeroBonito(numero) {
-
-    if (Number.isInteger(numero)) {
-        return numero;
-    }
-
-    return Number(
-        numero.toFixed(2)
-    );
-}
+        titulo.className = "tituloArea";
 
 
-/* =====================================================
-   ACTUALIZAR SEMÁFORO
-===================================================== */
+        const h2 = document.createElement("h2");
 
-function actualizarSemaforo(input, semaforo) {
-
-    semaforo.classList.remove(
-        "verde",
-        "amarillo",
-        "rojo"
-    );
-
-    if (input.value === "") {
-        return;
-    }
-
-    const objetivo =
-        parseFloat(input.dataset.objetivo);
-
-    const tengo =
-        parseFloat(input.value);
-
-    if (
-        isNaN(objetivo) ||
-        isNaN(tengo)
-    ) {
-        return;
-    }
-
-    /* Meta completa */
-
-    if (tengo >= objetivo) {
-
-        semaforo.classList.add("verde");
-
-        return;
-    }
-
-    /* Más de la mitad */
-
-    if (tengo >= objetivo * 0.5) {
-
-        semaforo.classList.add("amarillo");
-
-        return;
-    }
-
-    /* Menos de la mitad */
-
-    semaforo.classList.add("rojo");
-}
+        h2.textContent = nombresAreas[group];
 
 
-/* =====================================================
-   MOSTRAR PRODUCTOS
-===================================================== */
+        titulo.appendChild(h2);
 
-function mostrarProductos(grupo, lugar) {
-
-    const contenedor =
-        document.getElementById(lugar);
-
-    const area =
-        document.createElement("div");
-
-    area.className = "area";
+        area.appendChild(titulo);
 
 
-    const titulo =
-        document.createElement("h2");
+        productos
+            .filter(producto => producto.group === group)
+            .forEach((producto, index) => {
 
-    titulo.textContent =
-        nombresAreas[grupo];
+                const fila = document.createElement("div");
 
-    area.appendChild(titulo);
+                fila.className = "producto";
 
 
-    productos
+                /* =====================
+                   NOMBRE + META
+                ===================== */
 
-        .filter(
-            producto =>
-                producto.group === grupo
-        )
-
-        .forEach(
-            (producto, indice) => {
-
-                const fila =
+                const infoProducto =
                     document.createElement("div");
 
-                fila.className =
-                    "producto";
+                infoProducto.className =
+                    "infoProducto";
 
-
-                /* NOMBRE */
 
                 const nombre =
                     document.createElement("div");
@@ -1179,36 +1197,34 @@ function mostrarProductos(grupo, lugar) {
                     "nombre";
 
                 nombre.textContent =
-                    producto.name;
+                    producto.nombre;
 
-
-                /* META */
 
                 const meta =
-                    document.createElement("span");
-
-                meta.className =
-                    "meta";
-
-                meta.textContent =
-                    "Meta: " +
-                    numeroBonito(
-                        producto.target
-                    );
-
-                nombre.appendChild(meta);
-
-
-                /* ZONA DE CANTIDAD */
-
-                const cantidadZona =
                     document.createElement("div");
 
-                cantidadZona.className =
-                    "cantidadZona";
+                meta.className =
+                    "metaProducto";
+
+                meta.textContent =
+                    "Meta: " + producto.objetivo;
 
 
-                /* SEMÁFORO */
+                infoProducto.appendChild(nombre);
+
+                infoProducto.appendChild(meta);
+
+
+                /* =====================
+                   CONTROLES
+                ===================== */
+
+                const controles =
+                    document.createElement("div");
+
+                controles.className =
+                    "controlCantidad";
+
 
                 const semaforo =
                     document.createElement("span");
@@ -1216,52 +1232,30 @@ function mostrarProductos(grupo, lugar) {
                 semaforo.className =
                     "semaforo";
 
-                semaforo.title =
-                    "Estado del inventario";
-
-
-                /* INPUT */
 
                 const input =
                     document.createElement("input");
 
-                input.type =
-                    "number";
+                input.type = "number";
 
-                input.min =
-                    "0";
+                input.min = "0";
 
-                input.step =
-                    "any";
+                input.step = "any";
 
-                input.inputMode =
-                    "decimal";
-
-                input.placeholder =
-                    "Tengo";
-
-                input.dataset.producto =
-                    producto.name;
-
-                input.dataset.objetivo =
-                    producto.target;
+                input.className =
+                    "cantidad";
 
                 input.id =
-                    "cantidad_" +
-                    grupo +
+                    "producto_" +
+                    group +
                     "_" +
-                    indice;
+                    index;
 
-
-                /* LOCAL STORAGE */
-
-                const clave =
-                    "inventarioFisico_v2_" +
-                    input.id;
 
                 const guardado =
                     localStorage.getItem(
-                        clave
+                        "inventarioFisico_v2_" +
+                        input.id
                     );
 
 
@@ -1269,291 +1263,413 @@ function mostrarProductos(grupo, lugar) {
 
                     input.value =
                         guardado;
+
                 }
 
-
-                /* ACTUALIZAR SEMÁFORO
-                   AL CARGAR */
-
-                actualizarSemaforo(
-                    input,
-                    semaforo
-                );
-
-
-                /* CUANDO CAMBIA
-                   LA CANTIDAD */
 
                 input.addEventListener(
                     "input",
                     function() {
 
-                        if (
-                            input.value === ""
-                        ) {
+                        const valor =
+                            this.value;
 
-                            localStorage.removeItem(
-                                clave
-                            );
 
-                        } else {
-
-                            localStorage.setItem(
-                                clave,
-                                input.value
-                            );
-                        }
+                        localStorage.setItem(
+                            "inventarioFisico_v2_" +
+                            this.id,
+                            valor
+                        );
 
 
                         actualizarSemaforo(
-                            input,
-                            semaforo
+                            this,
+                            semaforo,
+                            producto.objetivo
                         );
+
                     }
                 );
 
 
-                cantidadZona.appendChild(
+                controles.appendChild(
                     semaforo
                 );
 
-                cantidadZona.appendChild(
+                controles.appendChild(
                     input
                 );
 
 
                 fila.appendChild(
-                    nombre
+                    infoProducto
                 );
 
                 fila.appendChild(
-                    cantidadZona
+                    controles
                 );
 
                 area.appendChild(
                     fila
                 );
 
-            }
+
+                if (input.value !== "") {
+
+                    actualizarSemaforo(
+                        input,
+                        semaforo,
+                        producto.objetivo
+                    );
+
+                }
+
+            });
+
+
+        grupos[group].appendChild(
+            area
         );
 
+    });
 
-    contenedor.appendChild(
-        area
-    );
 }
 
 
 /* =====================================================
-   CREAR LAS ÁREAS
+   SEMAFORO
 ===================================================== */
 
-mostrarProductos(
-    "gris",
-    "gris"
-);
+function actualizarSemaforo(
+    input,
+    semaforo,
+    objetivo
+) {
 
-mostrarProductos(
-    "morado",
-    "morado"
-);
+    const valor =
+        parseFloat(input.value);
 
-mostrarProductos(
-    "comida",
-    "comida"
-);
+
+    semaforo.classList.remove(
+        "verde",
+        "amarillo",
+        "rojo"
+    );
+
+
+    if (isNaN(valor)) {
+
+        return;
+
+    }
+
+
+    if (valor >= objetivo) {
+
+        semaforo.classList.add(
+            "verde"
+        );
+
+    }
+
+    else if (valor >= objetivo * .5) {
+
+        semaforo.classList.add(
+            "amarillo"
+        );
+
+    }
+
+    else {
+
+        semaforo.classList.add(
+            "rojo"
+        );
+
+    }
+
+
+    semaforo.classList.remove(
+        "pulse"
+    );
+
+    void semaforo.offsetWidth;
+
+    semaforo.classList.add(
+        "pulse"
+    );
+
+}
 
 
 /* =====================================================
    BUSCADOR
 ===================================================== */
 
-document
-    .getElementById("buscador")
-    .addEventListener(
-        "input",
-        function() {
-
-            const busqueda =
-                this.value
-                    .toLowerCase()
-                    .trim();
+const buscador =
+    document.getElementById("buscador");
 
 
-            document
-                .querySelectorAll(
-                    ".producto"
-                )
-                .forEach(
-                    fila => {
+buscador.addEventListener(
+    "input",
+    function() {
+
+        const busqueda =
+            this.value
+                .toLowerCase()
+                .trim();
+
+
+        this.classList.toggle(
+            "busquedaActiva",
+            busqueda !== ""
+        );
+
+
+        document
+            .querySelectorAll(".area")
+            .forEach(area => {
+
+                let encontrados = 0;
+
+
+                area
+                    .querySelectorAll(".producto")
+                    .forEach(fila => {
 
                         const nombre =
                             fila
-                                .querySelector(
-                                    ".nombre"
-                                )
+                                .querySelector(".nombre")
                                 .textContent
                                 .toLowerCase();
 
 
-                        if (
+                        const coincide =
                             busqueda === "" ||
-                            nombre.includes(
-                                busqueda
-                            )
-                        ) {
+                            nombre.includes(busqueda);
+
+
+                        fila.classList.remove(
+                            "busquedaEntrada"
+                        );
+
+
+                        if (coincide) {
+
+                            encontrados++;
 
                             fila.style.display =
                                 "flex";
 
-                        } else {
+                            fila.style.opacity =
+                                "1";
+
+                            fila.style.transform =
+                                "translateY(0)";
+
+
+                            if (busqueda !== "") {
+
+                                void fila.offsetWidth;
+
+                                fila.classList.add(
+                                    "busquedaEntrada"
+                                );
+
+                            }
+
+                        }
+
+                        else {
 
                             fila.style.display =
                                 "none";
+
+                            fila.style.opacity =
+                                "0";
+
+                            fila.style.transform =
+                                "translateY(-4px)";
+
                         }
-                    }
-                );
+
+                    });
 
 
-            document
-                .querySelectorAll(
-                    ".area"
-                )
-                .forEach(
-                    area => {
+                if (encontrados === 0) {
 
-                        const productosVisibles =
-                            Array.from(
-                                area.querySelectorAll(
-                                    ".producto"
-                                )
-                            ).some(
-                                producto =>
-                                    producto.style.display !==
-                                    "none"
-                            );
+                    area.style.display =
+                        "none";
 
+                }
 
-                        area.style.display =
-                            productosVisibles
-                                ? "block"
-                                : "none";
-                    }
-                );
-        }
-    );
+                else {
+
+                    area.style.display =
+                        "block";
+
+                    area.style.opacity =
+                        "1";
+
+                    area.style.transform =
+                        "translateY(0)";
+
+                }
+
+            });
+
+    }
+);
 
 
 /* =====================================================
-   ANIMACIÓN DEL OSITO
+   CAMBIO DE OSITOS
 ===================================================== */
 
-function mostrarAnimacionOso() {
+const decoraciones = [
 
-    const oso =
+    ["🐻","☕","🐻","☕","🐻","☕","🐻"],
+
+    ["🧸","☕","🧸","☕","🧸","☕","🧸"],
+
+    ["🐻","🍪","🐻","🍪","🐻","🍪","🐻"],
+
+    ["🧸","🧋","🧸","🧋","🧸","🧋","🧸"]
+
+];
+
+
+let decoracionActual = 0;
+
+
+function cambiarOsitos() {
+
+    const contenedor =
         document.getElementById(
-            "animacionOso"
+            "decoracionSuperior"
         );
 
 
-    oso.classList.remove(
-        "mostrar"
+    decoracionActual++;
+
+
+    if (
+        decoracionActual >=
+        decoraciones.length
+    ) {
+
+        decoracionActual = 0;
+
+    }
+
+
+    contenedor.classList.remove(
+        "decoracionCambio"
     );
 
 
-    void oso.offsetWidth;
+    void contenedor.offsetWidth;
 
 
-    oso.classList.add(
-        "mostrar"
+    contenedor.innerHTML =
+        decoraciones[
+            decoracionActual
+        ]
+        .map(emoji => {
+
+            return `
+                <span>${emoji}</span>
+            `;
+
+        })
+        .join("");
+
+
+    contenedor.classList.add(
+        "decoracionCambio"
     );
 
-
-    setTimeout(
-        () => {
-
-            oso.classList.remove(
-                "mostrar"
-            );
-
-        },
-        1500
-    );
 }
 
 
+setInterval(
+    cambiarOsitos,
+    3500
+);
+
+
 /* =====================================================
-   GENERAR Y COPIAR
+   GENERAR LISTA
 ===================================================== */
 
 function generarYCopiar() {
 
-    let lista = [];
+    const faltantes = [];
 
 
-    document
-        .querySelectorAll(
-            "input[data-producto]"
-        )
-        .forEach(
-            input => {
+    productos.forEach(producto => {
 
-                if (
-                    input.value === ""
-                ) {
-                    return;
-                }
+        const productosGrupo =
+            productos.filter(
+                p =>
+                    p.group ===
+                    producto.group
+            );
 
 
-                const objetivo =
-                    parseFloat(
-                        input.dataset.objetivo
-                    );
+        const indice =
+            productosGrupo.indexOf(
+                producto
+            );
 
 
-                const tengo =
-                    parseFloat(
-                        input.value
-                    );
+        const input =
+            document.querySelector(
+                `#producto_${producto.group}_${indice}`
+            );
 
 
-                if (
-                    isNaN(objetivo) ||
-                    isNaN(tengo)
-                ) {
-                    return;
-                }
+        if (!input) {
+
+            return;
+
+        }
 
 
-                const falta =
-                    objetivo - tengo;
+        const valor =
+            parseFloat(input.value);
 
 
-                if (
-                    falta <= 0
-                ) {
-                    return;
-                }
+        if (isNaN(valor)) {
+
+            return;
+
+        }
 
 
-                lista.push(
+        if (
+            valor <
+            producto.objetivo
+        ) {
 
-                    numeroBonito(
-                        falta
-                    ) +
+            const falta =
+                producto.objetivo -
+                valor;
 
-                    " " +
 
-                    input.dataset.producto
-                );
+            faltantes.push(
+                `${producto.nombre}: ${falta}`
+            );
 
-            }
+        }
+
+    });
+
+
+    const resultado =
+        document.getElementById(
+            "resultado"
         );
-
-
-    const texto =
-        lista.join("\n");
-
 
     const mensaje =
         document.getElementById(
@@ -1561,32 +1677,56 @@ function generarYCopiar() {
         );
 
 
-    const resultado =
-        document.getElementById(
-            "resultado"
-        );
-
-
     if (
-        texto === ""
+        faltantes.length ===
+        0
     ) {
 
-        mensaje.textContent =
+        resultado.value =
             "🐻✨ No falta nada 😎";
 
-        resultado.style.display =
-            "none";
+        mensaje.textContent =
+            "¡Todo está completo! 🐻";
+
+
+        mostrarOso();
+
+
+        setTimeout(() => {
+
+            ocultarOso();
+
+        }, 1600);
+
 
         return;
+
     }
+
+
+    const texto =
+        "*URGENTES 🚨*\n\n" +
+        faltantes.join("\n");
 
 
     resultado.value =
         texto;
 
-    resultado.style.display =
-        "block";
 
+    mensaje.textContent =
+        "¡Lista generada y copiada! 🐻☕";
+
+
+    copiarTexto(texto);
+
+}
+
+
+/* =====================================================
+   COPIAR
+===================================================== */
+
+function copiarTexto(texto) {
 
     if (
         navigator.clipboard &&
@@ -1594,63 +1734,62 @@ function generarYCopiar() {
     ) {
 
         navigator.clipboard
+            .writeText(texto)
+            .then(() => {
 
-            .writeText(
-                texto
-            )
+                mostrarOso();
 
-            .then(
-                () => {
 
-                    mensaje.textContent =
-                        "🐻✨ Ya puedes pegarla en WhatsApp.";
+                setTimeout(() => {
 
-                    mostrarAnimacionOso();
-                }
-            )
+                    ocultarOso();
 
-            .catch(
-                () => {
+                }, 1600);
 
-                    copiarAlternativo(
-                        texto,
-                        mensaje
-                    );
-                }
-            );
+            })
+            .catch(() => {
 
-    } else {
+                copiarAlternativo(
+                    texto
+                );
+
+            });
+
+    }
+
+    else {
 
         copiarAlternativo(
-            texto,
-            mensaje
+            texto
         );
+
     }
+
 }
 
 
 /* =====================================================
-   COPIA ALTERNATIVA
+   COPIADO ALTERNATIVO
 ===================================================== */
 
-function copiarAlternativo(
-    texto,
-    mensaje
-) {
+function copiarAlternativo(texto) {
 
-    const resultado =
-        document.getElementById(
-            "resultado"
+    const temporal =
+        document.createElement(
+            "textarea"
         );
 
 
-    resultado.style.display =
-        "block";
+    temporal.value =
+        texto;
 
 
-    resultado.focus();
+    document.body.appendChild(
+        temporal
+    );
 
-    resultado.select();
+
+    temporal.select();
 
 
     try {
@@ -1660,17 +1799,63 @@ function copiarAlternativo(
         );
 
 
-        mensaje.textContent =
-            "🐻✨ Ya puedes pegarla en WhatsApp.";
+        mostrarOso();
 
 
-        mostrarAnimacionOso();
+        setTimeout(() => {
 
-    } catch (e) {
+            ocultarOso();
 
-        mensaje.textContent =
-            "📋 La lista está abajo; mantenla presionada para copiarla.";
+        }, 1600);
+
     }
+
+    catch (error) {
+
+        document
+            .getElementById(
+                "mensaje"
+            )
+            .textContent =
+            "Lista generada. Cópiala manualmente 🐻";
+
+    }
+
+
+    document.body.removeChild(
+        temporal
+    );
+
+}
+
+
+/* =====================================================
+   ANIMACION OSO
+===================================================== */
+
+function mostrarOso() {
+
+    document
+        .getElementById(
+            "animacionOso"
+        )
+        .classList.add(
+            "mostrar"
+        );
+
+}
+
+
+function ocultarOso() {
+
+    document
+        .getElementById(
+            "animacionOso"
+        )
+        .classList.remove(
+            "mostrar"
+        );
+
 }
 
 
@@ -1680,62 +1865,136 @@ function copiarAlternativo(
 
 function nuevaLista() {
 
-    if (
-        !confirm(
-            "¿Seguro que quieres borrar las cantidades y empezar una nueva lista?"
-        )
-    ) {
+    const confirmar =
+        confirm(
+            "¿Seguro que quieres limpiar toda la lista actual? 🐻"
+        );
+
+
+    if (!confirmar) {
 
         return;
+
     }
+
+
+    const inputs =
+        document.querySelectorAll(
+            ".cantidad"
+        );
+
+
+    inputs.forEach(
+        (input, index) => {
+
+            input.style.transition =
+                ".3s";
+
+            input.style.transform =
+                "scale(.8)";
+
+            input.style.opacity =
+                "0";
+
+
+            setTimeout(() => {
+
+                input.value = "";
+
+                input.style.transform =
+                    "scale(1)";
+
+                input.style.opacity =
+                    "1";
+
+            }, 100 + index * 4);
+
+
+            localStorage.removeItem(
+                "inventarioFisico_v2_" +
+                input.id
+            );
+
+
+            const semaforo =
+                input.parentElement
+                    .querySelector(
+                        ".semaforo"
+                    );
+
+
+            semaforo.classList.remove(
+                "verde",
+                "amarillo",
+                "rojo"
+            );
+
+        }
+    );
+
+
+    document
+        .getElementById(
+            "resultado"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "mensaje"
+        )
+        .textContent =
+        "✨ Lista nueva lista para comenzar 🐻";
+
+
+    buscador.value = "";
+
+
+    buscador.classList.remove(
+        "busquedaActiva"
+    );
 
 
     document
         .querySelectorAll(
-            "input[data-producto]"
+            ".area"
         )
-        .forEach(
-            input => {
+        .forEach(area => {
 
-                input.value = "";
+            area.style.display =
+                "block";
 
+            area.style.opacity =
+                "1";
 
-                localStorage.removeItem(
-                    "inventarioFisico_v2_" +
-                    input.id
-                );
-
-
-                const semaforo =
-                    input.parentElement
-                        .querySelector(
-                            ".semaforo"
-                        );
+            area.style.transform =
+                "translateY(0)";
 
 
-                actualizarSemaforo(
-                    input,
-                    semaforo
-                );
-            }
-        );
+            area
+                .querySelectorAll(
+                    ".producto"
+                )
+                .forEach(fila => {
 
+                    fila.style.display =
+                        "flex";
 
-    document.getElementById(
-        "resultado"
-    ).value = "";
+                    fila.style.opacity =
+                        "1";
 
+                    fila.style.transform =
+                        "translateY(0)";
 
-    document.getElementById(
-        "resultado"
-    ).style.display =
-        "none";
+                    fila.classList.remove(
+                        "busquedaEntrada"
+                    );
 
+                });
 
-    document.getElementById(
-        "mensaje"
-    ).textContent =
-        "🧹 Lista limpia. ¡Listo para el nuevo inventario! 🐻";
+        });
+
 }
 
 
@@ -1748,48 +2007,223 @@ const modoOscuro =
         "modoOscuro"
     );
 
+const iconoModo =
+    document.getElementById(
+        "iconoModo"
+    );
 
-const guardadoModo =
+
+function actualizarModo() {
+
+    if (
+        modoOscuro.checked
+    ) {
+
+        document.body.classList.add(
+            "oscuro"
+        );
+
+        iconoModo.textContent =
+            "☀️";
+
+    }
+
+    else {
+
+        document.body.classList.remove(
+            "oscuro"
+        );
+
+        iconoModo.textContent =
+            "🌙";
+
+    }
+
+
+    actualizarFondoScroll();
+
+}
+
+
+const modoGuardado =
     localStorage.getItem(
         "bearyModoOscuro"
     );
 
 
-/* RECUPERAR PREFERENCIA */
-
 if (
-    guardadoModo === "si"
+    modoGuardado ===
+    "true"
 ) {
-
-    document.body.classList.add(
-        "oscuro"
-    );
 
     modoOscuro.checked =
         true;
+
 }
 
 
-/* CAMBIAR MODO */
+actualizarModo();
+
 
 modoOscuro.addEventListener(
     "change",
     function() {
 
-        document.body.classList.toggle(
-            "oscuro",
-            this.checked
-        );
-
-
         localStorage.setItem(
             "bearyModoOscuro",
             this.checked
-                ? "si"
-                : "no"
         );
+
+        actualizarModo();
+
     }
 );
+
+
+/* =====================================================
+   FONDO PROGRESIVO
+===================================================== */
+
+function actualizarFondoScroll() {
+
+    const alturaTotal =
+        document.documentElement
+            .scrollHeight -
+        window.innerHeight;
+
+
+    const posicion =
+        window.scrollY;
+
+
+    const progreso =
+        alturaTotal > 0
+            ? Math.min(
+                posicion /
+                alturaTotal,
+                1
+            )
+            : 0;
+
+
+    let inicio;
+    let final;
+
+
+    if (
+        !modoOscuro.checked
+    ) {
+
+        inicio =
+            [255, 220, 232];
+
+        final =
+            [239, 190, 210];
+
+    }
+
+    else {
+
+        inicio =
+            [36, 25, 28];
+
+        final =
+            [26, 17, 21];
+
+    }
+
+
+    const r =
+        Math.round(
+            inicio[0] +
+            (
+                final[0] -
+                inicio[0]
+            ) *
+            progreso
+        );
+
+
+    const g =
+        Math.round(
+            inicio[1] +
+            (
+                final[1] -
+                inicio[1]
+            ) *
+            progreso
+        );
+
+
+    const b =
+        Math.round(
+            inicio[2] +
+            (
+                final[2] -
+                inicio[2]
+            ) *
+            progreso
+        );
+
+
+    document.body.style.backgroundColor =
+        `rgb(${r}, ${g}, ${b})`;
+
+}
+
+
+window.addEventListener(
+    "scroll",
+    actualizarFondoScroll,
+    { passive: true }
+);
+
+
+/* =====================================================
+   FECHA
+===================================================== */
+
+function mostrarFecha() {
+
+    const fecha =
+        new Date();
+
+
+    const opciones = {
+
+        weekday: "long",
+
+        day: "numeric",
+
+        month: "long",
+
+        year: "numeric"
+
+    };
+
+
+    document
+        .getElementById(
+            "fecha"
+        )
+        .textContent =
+        fecha.toLocaleDateString(
+            "es-MX",
+            opciones
+        );
+
+}
+
+
+/* =====================================================
+   INICIAR APP
+===================================================== */
+
+crearAreas();
+
+mostrarFecha();
+
+actualizarFondoScroll();
 
 </script>
 
