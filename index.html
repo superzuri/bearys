@@ -8,40 +8,222 @@
 
 <style>
 
+/* =========================================================
+   🐻 BEARY'S INVENTARIO 2.0
+   Cute Coffee Shop Edition
+========================================================= */
+
+:root {
+    --rosa-fondo: #ffdce8;
+    --rosa-suave: #ffeaf1;
+    --rosa-card: #fffafb;
+    --rosa-borde: #f4d4df;
+    --rosa-fuerte: #e98baa;
+
+    --cafe: #4b2e25;
+    --cafe-titulo: #6b3e31;
+    --cafe-suave: #81584c;
+    --cafe-claro: #a47770;
+
+    --verde: #62b86f;
+    --amarillo: #e8bc55;
+    --rojo: #df6565;
+
+    --sombra:
+        0 9px 24px rgba(100,55,45,.13);
+
+    --sombra-suave:
+        0 5px 15px rgba(120,70,60,.11);
+
+    --transicion:
+        .25s cubic-bezier(.22,1,.36,1);
+}
+
+
+/* =========================================================
+   🌸 BASE
+========================================================= */
+
 * {
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
+
     margin: 0;
-    padding: 25px 15px 40px;
-    font-family: Arial, sans-serif;
-    background: #ffdce8;
-    color: #4b2e25;
-    transition: background-color .4s, color .4s;
+
+    padding:
+        25px 15px 40px;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    background:
+        var(--rosa-fondo);
+
+    color:
+        var(--cafe);
+
+    transition:
+        background-color .4s,
+        color .4s;
+
     overflow-x: hidden;
+
+    position: relative;
 }
 
 
-/* =========================
-   OSITOS DE ARRIBA
-========================= */
+/* =========================================================
+   ✨ DECORACIÓN DEL FONDO
+========================================================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    width: 180px;
+    height: 180px;
+
+    top: 80px;
+    left: -95px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.20);
+
+    pointer-events: none;
+
+    z-index: -1;
+
+    animation:
+        burbujaGrande 7s ease-in-out infinite;
+}
+
+body::after {
+
+    content: "";
+
+    position: fixed;
+
+    width: 230px;
+    height: 230px;
+
+    right: -125px;
+    bottom: 80px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.16);
+
+    pointer-events: none;
+
+    z-index: -1;
+
+    animation:
+        burbujaGrande 9s 1s ease-in-out infinite reverse;
+}
+
+@keyframes burbujaGrande {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translateY(-18px)
+            scale(1.06);
+    }
+}
+
+
+/* =========================================================
+   🐻 OSITOS DE ARRIBA
+========================================================= */
 
 .decoracionSuperior {
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
     gap: 14px;
-    height: 34px;
-    margin-bottom: 8px;
+
+    height: 42px;
+
+    margin-bottom: 7px;
+
     overflow: hidden;
+
+    position: relative;
+}
+
+.decoracionSuperior::before {
+
+    content: "✦";
+
+    position: absolute;
+
+    left: 19%;
+
+    top: 3px;
+
+    font-size: 12px;
+
+    color: rgba(107,62,49,.38);
+
+    animation:
+        estrellaFlota 2.5s ease-in-out infinite;
+}
+
+.decoracionSuperior::after {
+
+    content: "♡";
+
+    position: absolute;
+
+    right: 19%;
+
+    bottom: 2px;
+
+    font-size: 13px;
+
+    color: rgba(107,62,49,.35);
+
+    animation:
+        estrellaFlota 3s .5s ease-in-out infinite;
 }
 
 .decoracionSuperior span {
+
     display: inline-block;
-    font-size: 22px;
-    opacity: .8;
-    animation: ositosArriba 3.2s ease-in-out infinite;
+
+    font-size: 23px;
+
+    opacity: .84;
+
+    filter:
+        drop-shadow(0 2px 2px rgba(100,55,45,.08));
+
+    animation:
+        ositosArriba 3.2s ease-in-out infinite;
+
+    transition:
+        transform .25s;
 }
 
 .decoracionSuperior span:nth-child(2) {
@@ -71,213 +253,409 @@ body {
 @keyframes ositosArriba {
 
     0%,100% {
-        transform: translateY(0) rotate(0deg) scale(1);
+        transform:
+            translateY(0)
+            rotate(0deg)
+            scale(1);
     }
 
     25% {
-        transform: translateY(-4px) rotate(-5deg) scale(1.04);
+        transform:
+            translateY(-5px)
+            rotate(-5deg)
+            scale(1.05);
     }
 
     50% {
-        transform: translateY(2px) rotate(4deg) scale(.98);
+        transform:
+            translateY(2px)
+            rotate(4deg)
+            scale(.98);
     }
 
     75% {
-        transform: translateY(-3px) rotate(-3deg) scale(1.02);
+        transform:
+            translateY(-3px)
+            rotate(-3deg)
+            scale(1.03);
+    }
+}
+
+@keyframes estrellaFlota {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+        opacity: .35;
+    }
+
+    50% {
+        transform:
+            translateY(-5px)
+            rotate(15deg);
+        opacity: .75;
     }
 }
 
 
-/* =========================
-   CAMBIO DE DECORACION
-========================= */
+/* =========================================================
+   ✨ CAMBIO DE DECORACIÓN
+========================================================= */
 
 .decoracionCambio {
-    animation: cambioOsitos .35s ease both;
+
+    animation:
+        cambioOsitos .4s ease both;
 }
 
 @keyframes cambioOsitos {
 
     0% {
-        opacity: .2;
-        transform: translateY(-5px) scale(.94);
+        opacity: .1;
+
+        transform:
+            translateY(-7px)
+            scale(.92);
     }
 
-    60% {
+    55% {
         opacity: 1;
-        transform: translateY(2px) scale(1.04);
+
+        transform:
+            translateY(2px)
+            scale(1.06);
     }
 
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translateY(0)
+            scale(1);
     }
 }
 
 
-/* =========================
-   MODO OSCURO
-========================= */
+/* =========================================================
+   🌙 MODO OSCURO
+========================================================= */
 
 .modoSuperior {
+
     position: absolute;
+
     top: 15px;
     right: 15px;
+
     display: flex;
+
     align-items: center;
+
     gap: 7px;
+
+    padding: 5px 7px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,.35);
+
+    box-shadow:
+        0 4px 12px rgba(100,55,45,.08);
+
+    backdrop-filter:
+        blur(7px);
+
+    -webkit-backdrop-filter:
+        blur(7px);
+
     z-index: 100;
+
+    transition:
+        background .4s,
+        box-shadow .4s;
 }
 
 #iconoModo {
-    font-size: 20px;
-    transition: transform .4s;
+
+    font-size: 19px;
+
+    transition:
+        transform .4s;
+}
+
+.modoSuperior:hover #iconoModo {
+
+    transform:
+        rotate(18deg)
+        scale(1.1);
 }
 
 .interruptor {
+
     position: relative;
+
     width: 48px;
+
     height: 26px;
+
     display: inline-block;
 }
 
 .interruptor input {
+
     opacity: 0;
+
     width: 0;
+
     height: 0;
 }
 
 .slider {
+
     position: absolute;
+
     inset: 0;
+
     cursor: pointer;
-    background: #b98272;
+
+    background:
+        #c58a79;
+
     border-radius: 30px;
+
     transition: .4s;
+
+    box-shadow:
+        inset 0 1px 3px rgba(0,0,0,.12);
 }
 
 .slider::before {
+
     content: "";
+
     position: absolute;
+
     width: 20px;
     height: 20px;
+
     left: 3px;
     top: 3px;
-    background: white;
+
+    background:
+        white;
+
     border-radius: 50%;
+
     transition: .4s;
-    box-shadow: 0 2px 5px rgba(0,0,0,.25);
+
+    box-shadow:
+        0 2px 6px rgba(0,0,0,.22);
 }
 
 .interruptor input:checked + .slider {
-    background: #684338;
+
+    background:
+        #70483c;
 }
 
 .interruptor input:checked + .slider::before {
-    transform: translateX(22px);
+
+    transform:
+        translateX(22px);
 }
 
 
-/* =========================
-   CONTENEDOR
-========================= */
+/* =========================================================
+   🧸 CONTENEDOR
+========================================================= */
 
 .contenedor {
+
     max-width: 650px;
+
     margin: auto;
+
+    position: relative;
 }
 
 
-/* =========================
-   TITULO
-========================= */
+/* =========================================================
+   ☕ TITULO
+========================================================= */
 
 h1 {
+
     text-align: center;
-    margin: 5px 0 5px;
-    color: #6b3e31;
+
+    margin:
+        5px 0 5px;
+
+    color:
+        var(--cafe-titulo);
+
     font-size: 30px;
-    animation: tituloEntrada .8s ease both;
+
+    letter-spacing:
+        -.4px;
+
+    text-shadow:
+        0 2px 0 rgba(255,255,255,.5);
+
+    animation:
+        tituloEntrada .8s ease both;
 }
 
 .subtitulo {
+
     text-align: center;
-    margin: 0 0 5px;
-    color: #81584c;
+
+    margin:
+        0 0 5px;
+
+    color:
+        var(--cafe-suave);
+
     font-size: 14px;
-    animation: tituloEntrada .8s .12s ease both;
+
+    animation:
+        tituloEntrada .8s .12s ease both;
 }
 
 #fecha {
+
     text-align: center;
+
     font-size: 13px;
-    color: #946c60;
-    margin-bottom: 18px;
-    animation: tituloEntrada .8s .2s ease both;
+
+    color:
+        #946c60;
+
+    margin-bottom:
+        18px;
+
+    animation:
+        tituloEntrada .8s .2s ease both;
 }
 
 @keyframes tituloEntrada {
 
     from {
         opacity: 0;
-        transform: translateY(-15px);
+
+        transform:
+            translateY(-15px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 }
 
 
-/* =========================
-   BUSCADOR
-========================= */
+/* =========================================================
+   🔎 BUSCADOR
+========================================================= */
 
 .buscador {
+
     width: 100%;
-    border: none;
+
+    border:
+        2px solid transparent;
+
     outline: none;
-    padding: 14px 16px;
-    border-radius: 18px;
-    background: rgba(255,255,255,.9);
-    box-shadow: 0 5px 15px rgba(120,70,60,.12);
+
+    padding:
+        14px 16px 14px 43px;
+
+    border-radius:
+        18px;
+
+    background:
+        rgba(255,255,255,.92);
+
+    box-shadow:
+        var(--sombra-suave);
+
     font-size: 15px;
-    color: #54342b;
-    margin-bottom: 18px;
+
+    color:
+        #54342b;
+
+    margin-bottom:
+        18px;
 
     transition:
         transform .22s,
         box-shadow .22s,
-        background .22s;
-}
+        background .22s,
+        border-color .22s;
 
-.buscador:focus {
-    transform: translateY(-2px) scale(1.01);
-    box-shadow: 0 8px 20px rgba(120,70,60,.18);
-}
-
-.buscador.busquedaActiva {
-    box-shadow:
-        0 7px 20px rgba(120,70,60,.18);
+    background-image:
+        linear-gradient(
+            transparent,
+            transparent
+        );
 }
 
 .buscador::placeholder {
-    color: #ad8880;
+
+    color:
+        #ad8880;
+}
+
+.buscador:focus {
+
+    transform:
+        translateY(-2px)
+        scale(1.005);
+
+    border-color:
+        rgba(201,130,148,.35);
+
+    box-shadow:
+        0 9px 23px rgba(120,70,60,.17),
+        0 0 0 4px rgba(233,139,170,.09);
+}
+
+.buscador.busquedaActiva {
+
+    box-shadow:
+        0 8px 21px rgba(120,70,60,.18);
 }
 
 
-/* =========================
-   AREAS
-========================= */
+/* =========================================================
+   📦 AREAS
+========================================================= */
 
 .area {
-    background: rgba(255,255,255,.94);
-    border-radius: 24px;
-    padding: 16px;
-    margin-bottom: 18px;
-    box-shadow: 0 8px 22px rgba(100,55,45,.13);
-    overflow: hidden;
+
+    background:
+        rgba(255,255,255,.94);
+
+    border-radius:
+        24px;
+
+    padding:
+        16px;
+
+    margin-bottom:
+        18px;
+
+    box-shadow:
+        var(--sombra);
+
+    overflow:
+        hidden;
+
+    position:
+        relative;
 
     transition:
         transform .3s,
@@ -285,12 +663,46 @@ h1 {
         opacity .2s;
 }
 
+
+/* pequeño brillo */
+
+.area::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 18px;
+    right: 18px;
+
+    height: 2px;
+
+    border-radius:
+        0 0 10px 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(233,139,170,.38),
+            transparent
+        );
+
+    opacity: .7;
+}
+
 .area:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 28px rgba(100,55,45,.18);
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 13px 29px rgba(100,55,45,.17);
 }
 
 #gris .area {
+
     animation:
         tarjetaEntrada
         .8s
@@ -300,6 +712,7 @@ h1 {
 }
 
 #morado .area {
+
     animation:
         tarjetaEntrada
         .8s
@@ -309,6 +722,7 @@ h1 {
 }
 
 #comida .area {
+
     animation:
         tarjetaEntrada
         .8s
@@ -320,517 +734,1117 @@ h1 {
 @keyframes tarjetaEntrada {
 
     0% {
+
         opacity: 0;
-        transform: translateY(45px) scale(.94);
+
+        transform:
+            translateY(45px)
+            scale(.94);
     }
 
     55% {
+
         opacity: 1;
-        transform: translateY(-7px) scale(1.015);
+
+        transform:
+            translateY(-7px)
+            scale(1.015);
     }
 
     75% {
-        transform: translateY(3px) scale(.997);
+
+        transform:
+            translateY(3px)
+            scale(.997);
     }
 
     100% {
+
         opacity: 1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translateY(0)
+            scale(1);
     }
 }
 
 
-/* =========================
-   TITULOS DE AREA
-========================= */
+/* =========================================================
+   🏷️ TITULOS DE AREA
+========================================================= */
 
 .tituloArea {
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
-    margin-bottom: 10px;
-    padding: 2px 3px 9px;
-    border-bottom: 2px dashed #efd0d8;
+
+    margin-bottom:
+        10px;
+
+    padding:
+        2px 3px 9px;
+
+    border-bottom:
+        2px dashed #efd0d8;
+
+    position: relative;
 }
 
 .tituloArea h2 {
+
     margin: 0;
+
     font-size: 18px;
-    color: #633c32;
+
+    color:
+        #633c32;
+
+    transition:
+        transform .25s;
+}
+
+.area:hover .tituloArea h2 {
+
+    transform:
+        translateX(2px);
 }
 
 
-/* =========================
-   PRODUCTOS
-========================= */
+/* =========================================================
+   🐻 PRODUCTOS
+========================================================= */
 
 .producto {
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
+
     gap: 10px;
-    padding: 10px 3px;
-    border-bottom: 1px solid #f3e2e5;
+
+    padding:
+        10px 5px;
+
+    border-bottom:
+        1px solid #f3e2e5;
 
     opacity: 1;
-    transform: translateY(0);
+
+    transform:
+        translateY(0);
+
+    border-radius:
+        12px;
 
     transition:
         background .2s,
         transform .2s,
-        opacity .15s;
+        opacity .15s,
+        padding .2s;
 }
 
 .producto:last-child {
-    border-bottom: none;
+
+    border-bottom:
+        none;
 }
 
 .producto:hover {
-    background: #fff5f8;
-    transform: translateX(3px);
+
+    background:
+        #fff5f8;
+
+    transform:
+        translateX(3px);
+
+    padding-left:
+        8px;
+
+    padding-right:
+        8px;
+}
+
+.producto:active {
+
+    transform:
+        translateX(3px)
+        scale(.995);
 }
 
 
-/* =========================
-   NOMBRE + META
-========================= */
+/* =========================================================
+   📝 NOMBRE + META
+========================================================= */
 
 .infoProducto {
+
     display: flex;
+
     flex-direction: column;
+
     align-items: flex-start;
+
     justify-content: center;
+
     gap: 3px;
+
     flex: 1;
+
     min-width: 0;
 }
 
 .nombre {
+
     font-size: 14px;
+
     font-weight: 500;
+
     line-height: 1.2;
+
+    color:
+        #4b2e25;
 }
 
 .metaProducto {
+
     font-size: 12px;
+
     font-weight: 600;
-    color: #a47770;
-    opacity: .85;
-    line-height: 1.2;
+
+    color:
+        #a47770;
+
+    opacity:
+        .85;
+
+    line-height:
+        1.2;
 }
 
 
-/* =========================
-   CONTROLES
-========================= */
+/* =========================================================
+   🔢 CONTROLES
+========================================================= */
 
 .controlCantidad {
+
     display: flex;
+
     align-items: center;
+
     gap: 7px;
+
     flex-shrink: 0;
 }
 
 .cantidad {
-    width: 70px;
-    border: 2px solid #ead0d6;
-    background: #fffafb;
-    border-radius: 12px;
-    padding: 8px 7px;
-    text-align: center;
-    outline: none;
-    color: #4d3028;
-    font-size: 14px;
-    transition: .25s;
+
+    width:
+        70px;
+
+    border:
+        2px solid #ead0d6;
+
+    background:
+        #fffafb;
+
+    border-radius:
+        12px;
+
+    padding:
+        8px 7px;
+
+    text-align:
+        center;
+
+    outline:
+        none;
+
+    color:
+        #4d3028;
+
+    font-size:
+        14px;
+
+    font-weight:
+        600;
+
+    transition:
+        .25s;
+}
+
+.cantidad:hover {
+
+    border-color:
+        #dfb5c1;
+
+    background:
+        #fff;
 }
 
 .cantidad:focus {
-    border-color: #c98294;
-    transform: scale(1.04);
+
+    border-color:
+        #c98294;
+
+    background:
+        #fff;
+
+    transform:
+        scale(1.05);
+
+    box-shadow:
+        0 0 0 4px rgba(201,130,148,.10);
 }
 
 
-/* =========================
-   ANIMACION DE BUSQUEDA
-========================= */
+/* =========================================================
+   ✨ BUSQUEDA
+========================================================= */
 
 .producto.busquedaEntrada {
-    animation: productoBusqueda .18s ease-out both;
+
+    animation:
+        productoBusqueda
+        .18s
+        ease-out
+        both;
 }
 
 @keyframes productoBusqueda {
 
     from {
+
         opacity: 0;
-        transform: translateY(-4px);
+
+        transform:
+            translateY(-4px);
     }
 
     to {
+
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 }
 
 
-/* =========================
-   SEMAFORO
-========================= */
+/* =========================================================
+   🚦 SEMAFORO
+========================================================= */
 
 .semaforo {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: #c7c7c7;
-    flex-shrink: 0;
-    transition: .25s;
+
+    width:
+        11px;
+
+    height:
+        11px;
+
+    border-radius:
+        50%;
+
+    background:
+        #c7c7c7;
+
+    flex-shrink:
+        0;
+
+    transition:
+        .25s;
 }
 
 .semaforo.verde {
-    background: #62b86f;
-    box-shadow: 0 0 7px rgba(98,184,111,.5);
+
+    background:
+        var(--verde);
+
+    box-shadow:
+        0 0 7px rgba(98,184,111,.55);
 }
 
 .semaforo.amarillo {
-    background: #e8bc55;
-    box-shadow: 0 0 7px rgba(232,188,85,.5);
+
+    background:
+        var(--amarillo);
+
+    box-shadow:
+        0 0 7px rgba(232,188,85,.55);
 }
 
 .semaforo.rojo {
-    background: #df6565;
-    box-shadow: 0 0 7px rgba(223,101,101,.5);
+
+    background:
+        var(--rojo);
+
+    box-shadow:
+        0 0 8px rgba(223,101,101,.58);
 }
 
 .semaforo.pulse {
-    animation: semaforoPop .25s ease;
+
+    animation:
+        semaforoPop .25s ease;
 }
 
 @keyframes semaforoPop {
 
     0% {
-        transform: scale(.6);
+        transform:
+            scale(.6);
     }
 
     60% {
-        transform: scale(1.35);
+        transform:
+            scale(1.35);
     }
 
     100% {
-        transform: scale(1);
+        transform:
+            scale(1);
     }
 }
 
 
-/* =========================
-   BOTONES
-========================= */
+/* =========================================================
+   🎀 BOTONES
+========================================================= */
 
 .botones {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
+
+    display:
+        flex;
+
+    gap:
+        10px;
+
+    margin-top:
+        20px;
 }
 
 button {
-    flex: 1;
-    border: none;
-    border-radius: 17px;
-    padding: 14px 10px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: .2s;
-    box-shadow: 0 6px 14px rgba(100,55,45,.15);
+
+    flex:
+        1;
+
+    border:
+        none;
+
+    border-radius:
+        17px;
+
+    padding:
+        14px 10px;
+
+    font-size:
+        14px;
+
+    font-weight:
+        bold;
+
+    cursor:
+        pointer;
+
+    transition:
+        transform .2s,
+        box-shadow .2s,
+        filter .2s;
+
+    box-shadow:
+        0 7px 16px rgba(100,55,45,.15);
 }
 
 button:active {
-    transform: scale(.95);
+
+    transform:
+        scale(.95);
 }
 
 .btnGenerar {
-    background: #75493c;
-    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7b4b3d,
+            #684034
+        );
+
+    color:
+        white;
 }
 
 .btnGenerar:hover {
-    background: #633b31;
-    transform: translateY(-2px);
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 20px rgba(100,55,45,.23);
+
+    filter:
+        brightness(1.04);
 }
 
 .btnNueva {
-    background: #f5cbd7;
-    color: #653b31;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7d0db,
+            #f1c1cf
+        );
+
+    color:
+        #653b31;
 }
 
 .btnNueva:hover {
-    background: #efbdcb;
-    transform: translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4c6d3,
+            #edb9c9
+        );
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 20px rgba(100,55,45,.16);
 }
 
 
-/* =========================
-   RESULTADO
-========================= */
+/* =========================================================
+   📋 RESULTADO
+========================================================= */
 
 #resultado {
-    width: 100%;
-    min-height: 140px;
-    margin-top: 16px;
-    padding: 15px;
-    border: none;
-    outline: none;
-    resize: vertical;
-    border-radius: 18px;
-    background: rgba(255,255,255,.9);
-    color: #4d3028;
-    font-family: monospace;
-    font-size: 14px;
-    line-height: 1.5;
-    box-shadow: 0 5px 15px rgba(100,55,45,.12);
-    transition: .3s;
+
+    width:
+        100%;
+
+    min-height:
+        140px;
+
+    margin-top:
+        16px;
+
+    padding:
+        15px;
+
+    border:
+        2px solid transparent;
+
+    outline:
+        none;
+
+    resize:
+        vertical;
+
+    border-radius:
+        18px;
+
+    background:
+        rgba(255,255,255,.9);
+
+    color:
+        #4d3028;
+
+    font-family:
+        monospace;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.5;
+
+    box-shadow:
+        var(--sombra-suave);
+
+    transition:
+        .3s;
+}
+
+#resultado:focus {
+
+    border-color:
+        rgba(201,130,148,.35);
+
+    box-shadow:
+        0 8px 20px rgba(100,55,45,.15),
+        0 0 0 4px rgba(233,139,170,.08);
 }
 
 #mensaje {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #70483c;
-    min-height: 20px;
+
+    text-align:
+        center;
+
+    margin-top:
+        15px;
+
+    font-size:
+        14px;
+
+    font-weight:
+        bold;
+
+    color:
+        #70483c;
+
+    min-height:
+        20px;
+
+    animation:
+        mensajeEntrada .3s ease;
+}
+
+@keyframes mensajeEntrada {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
 }
 
 
-/* =========================
-   OSITO ANIMADO
-========================= */
+/* =========================================================
+   🐻 OSITO ANIMADO
+========================================================= */
 
 #animacionOso {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%) scale(.5);
-    opacity: 0;
-    pointer-events: none;
-    z-index: 999;
-    text-align: center;
-    transition: .3s;
+
+    position:
+        fixed;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.5);
+
+    opacity:
+        0;
+
+    pointer-events:
+        none;
+
+    z-index:
+        999;
+
+    text-align:
+        center;
+
+    transition:
+        .3s;
 }
 
 #animacionOso.mostrar {
-    opacity: 1;
-    transform: translate(-50%,-50%) scale(1);
+
+    opacity:
+        1;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1);
 }
 
 .osoAnimado {
-    font-size: 80px;
-    animation: osoSalta .8s ease-in-out infinite;
-    filter: drop-shadow(0 8px 8px rgba(0,0,0,.18));
+
+    font-size:
+        80px;
+
+    animation:
+        osoSalta .8s ease-in-out infinite;
+
+    filter:
+        drop-shadow(
+            0 8px 8px
+            rgba(0,0,0,.18)
+        );
 }
 
 .textoOso {
-    background: white;
-    color: #694237;
-    padding: 10px 18px;
-    border-radius: 20px;
-    margin-top: 4px;
-    font-weight: bold;
-    box-shadow: 0 6px 20px rgba(0,0,0,.18);
+
+    background:
+        white;
+
+    color:
+        #694237;
+
+    padding:
+        10px 18px;
+
+    border-radius:
+        20px;
+
+    margin-top:
+        4px;
+
+    font-weight:
+        bold;
+
+    box-shadow:
+        0 7px 22px rgba(0,0,0,.18);
 }
 
 @keyframes osoSalta {
 
     0%,100% {
-        transform: translateY(0) rotate(-3deg);
+
+        transform:
+            translateY(0)
+            rotate(-3deg);
     }
 
     50% {
-        transform: translateY(-12px) rotate(3deg);
+
+        transform:
+            translateY(-12px)
+            rotate(3deg);
     }
 }
 
 
-/* =========================
-   DECORACION FINAL
-========================= */
+/* =========================================================
+   🎀 DECORACIÓN FINAL
+========================================================= */
 
 .decoracionFinal {
-    text-align: center;
-    margin-top: 22px;
-    font-size: 22px;
-    opacity: .8;
-    animation: decoracionFinalAnim 3s ease-in-out infinite;
+
+    text-align:
+        center;
+
+    margin-top:
+        24px;
+
+    font-size:
+        20px;
+
+    color:
+        #7d554b;
+
+    opacity:
+        .82;
+
+    animation:
+        decoracionFinalAnim
+        3s ease-in-out infinite;
+}
+
+.decoracionFinal::before {
+
+    content:
+        "☕  ";
+
+}
+
+.decoracionFinal::after {
+
+    content:
+        "  🐻";
+
 }
 
 @keyframes decoracionFinalAnim {
 
     0%,100% {
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 
     50% {
-        transform: translateY(-4px);
+
+        transform:
+            translateY(-4px);
     }
 }
 
 
-/* =========================
-   MODO OSCURO
-========================= */
+/* =========================================================
+   🌙 MODO OSCURO
+========================================================= */
 
 body.oscuro {
-    background: #24191c;
-    color: #f5e5e8;
+
+    background:
+        #24191c;
+
+    color:
+        #f5e5e8;
+}
+
+body.oscuro::before {
+
+    background:
+        rgba(255,170,195,.035);
+}
+
+body.oscuro::after {
+
+    background:
+        rgba(255,170,195,.03);
+}
+
+body.oscuro .modoSuperior {
+
+    background:
+        rgba(70,45,52,.55);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.2);
 }
 
 body.oscuro h1 {
-    color: #ffd2df;
+
+    color:
+        #ffd2df;
 }
 
 body.oscuro .subtitulo,
 body.oscuro #fecha {
-    color: #d5afb9;
+
+    color:
+        #d5afb9;
 }
 
 body.oscuro .buscador {
-    background: #38272b;
-    color: #f7e9ec;
-    box-shadow: 0 5px 15px rgba(0,0,0,.3);
+
+    background:
+        #38272b;
+
+    color:
+        #f7e9ec;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.3);
 }
 
 body.oscuro .buscador::placeholder {
-    color: #aa8991;
+
+    color:
+        #aa8991;
+}
+
+body.oscuro .buscador:focus {
+
+    border-color:
+        rgba(233,139,170,.25);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.3),
+        0 0 0 4px rgba(233,139,170,.06);
 }
 
 body.oscuro .area {
-    background: #302125;
-    box-shadow: 0 8px 22px rgba(0,0,0,.35);
+
+    background:
+        #302125;
+
+    box-shadow:
+        0 9px 24px rgba(0,0,0,.35);
+}
+
+body.oscuro .area::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,180,205,.20),
+            transparent
+        );
 }
 
 body.oscuro .tituloArea {
-    border-color: #53383e;
+
+    border-color:
+        #53383e;
 }
 
 body.oscuro .tituloArea h2 {
-    color: #ffd6df;
+
+    color:
+        #ffd6df;
 }
 
 body.oscuro .producto {
-    border-color: #493339;
+
+    border-color:
+        #493339;
 }
 
 body.oscuro .producto:hover {
-    background: #39282d;
+
+    background:
+        #39282d;
+}
+
+body.oscuro .nombre {
+
+    color:
+        #f5e5e8;
 }
 
 body.oscuro .cantidad {
-    background: #261a1e;
-    border-color: #5a3c44;
-    color: #f7e9ec;
+
+    background:
+        #261a1e;
+
+    border-color:
+        #5a3c44;
+
+    color:
+        #f7e9ec;
+}
+
+body.oscuro .cantidad:focus {
+
+    background:
+        #2d2025;
+
+    border-color:
+        #a96d80;
 }
 
 body.oscuro .metaProducto {
-    color: #d2aeb8;
+
+    color:
+        #d2aeb8;
 }
 
 body.oscuro #resultado {
-    background: #38272b;
-    color: #f7e9ec;
+
+    background:
+        #38272b;
+
+    color:
+        #f7e9ec;
 }
 
 body.oscuro #mensaje {
-    color: #e6bec9;
+
+    color:
+        #e6bec9;
 }
 
 body.oscuro .btnNueva {
-    background: #52343d;
-    color: #ffdce5;
+
+    background:
+        linear-gradient(
+            135deg,
+            #563740,
+            #4c3038
+        );
+
+    color:
+        #ffdce5;
+}
+
+body.oscuro .decoracionFinal {
+
+    color:
+        #d6aab6;
+}
+
+body.oscuro .textoOso {
+
+    background:
+        #38272b;
+
+    color:
+        #ffdce5;
 }
 
 
-/* =========================
-   MOVIL
-========================= */
+/* =========================================================
+   📱 MOVIL
+========================================================= */
 
 @media (max-width: 600px) {
 
     body {
-        padding: 18px 10px 35px;
+
+        padding:
+            18px 10px 35px;
     }
 
     .decoracionSuperior {
-        gap: 9px;
+
+        gap:
+            9px;
+
+        height:
+            39px;
     }
 
     .decoracionSuperior span {
-        font-size: 17px;
+
+        font-size:
+            17px;
+    }
+
+    .decoracionSuperior::before {
+
+        left:
+            12%;
+
+        font-size:
+            10px;
+    }
+
+    .decoracionSuperior::after {
+
+        right:
+            12%;
+
+        font-size:
+            11px;
     }
 
     .modoSuperior {
-        top: 10px;
-        right: 10px;
+
+        top:
+            10px;
+
+        right:
+            10px;
+
+        padding:
+            4px 6px;
     }
 
     h1 {
-        font-size: 26px;
-        padding-top: 5px;
+
+        font-size:
+            26px;
+
+        padding-top:
+            5px;
     }
 
     .subtitulo {
-        font-size: 13px;
+
+        font-size:
+            13px;
     }
 
     .area {
-        padding: 13px;
-        border-radius: 21px;
+
+        padding:
+            13px;
+
+        border-radius:
+            21px;
     }
 
     .nombre {
-        font-size: 13px;
+
+        font-size:
+            13px;
     }
 
     .metaProducto {
-        font-size: 11px;
+
+        font-size:
+            11px;
     }
 
     .cantidad {
-        width: 64px;
-    }
 
-    /* =========================
-       EVITA ZOOM AUTOMATICO
-       EN IPHONE / SAFARI
-    ========================= */
+        width:
+            64px;
+    }
 
     .buscador,
     .cantidad {
-        font-size: 16px;
+
+        font-size:
+            16px;
     }
 
     .botones {
-        flex-direction: column;
+
+        flex-direction:
+            column;
     }
 
     button {
-        width: 100%;
+
+        width:
+            100%;
+    }
+
+    .producto:hover {
+
+        transform:
+            none;
+
+        padding-left:
+            5px;
+
+        padding-right:
+            5px;
+    }
+
+    .producto:active {
+
+        transform:
+            scale(.99);
+    }
+
+    .osoAnimado {
+
+        font-size:
+            72px;
     }
 }
 
 
-/* =========================
-   REDUCCION DE MOVIMIENTO
-========================= */
+/* =========================================================
+   ♿ REDUCCIÓN DE MOVIMIENTO
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
     *,
     *::before,
     *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .01ms !important;
     }
 }
 
 </style>
+
 </head>
 
 <body>
